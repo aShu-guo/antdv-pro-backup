@@ -1,10 +1,10 @@
 <script setup lang="ts">
 interface DataItem {
-  title: string
-  desc: string
+  title: string;
+  desc: string;
 }
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const data = computed<DataItem[]>(() => {
   return [
@@ -28,8 +28,8 @@ const data = computed<DataItem[]>(() => {
       title: t('account.settings.security.MFA'),
       desc: t('account.settings.security.MFA-desc'),
     },
-  ]
-})
+  ];
+});
 </script>
 
 <template>
@@ -37,9 +37,7 @@ const data = computed<DataItem[]>(() => {
     <a-list item-layout="horizontal" :data-source="data">
       <template #renderItem="{ item }">
         <a-list-item>
-          <a-list-item-meta
-            :description="item.desc"
-          >
+          <a-list-item-meta :description="item.desc">
             <template #title>
               <a href="https://www.antdv.com/">{{ item.title }}</a>
             </template>

@@ -4,17 +4,17 @@ defineProps({
     type: String,
     default: '#3ff9dc',
   },
-})
+});
 </script>
 
 <template>
   <div class="chase-wrapper">
-    <div class="chase-item" />
-    <div class="chase-item" />
-    <div class="chase-item" />
-    <div class="chase-item" />
-    <div class="chase-item" />
-    <div class="chase-item" />
+    <div class="chase-item"></div>
+    <div class="chase-item"></div>
+    <div class="chase-item"></div>
+    <div class="chase-item"></div>
+    <div class="chase-item"></div>
+    <div class="chase-item"></div>
   </div>
 </template>
 

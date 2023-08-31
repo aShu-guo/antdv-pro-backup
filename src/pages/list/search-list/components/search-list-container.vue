@@ -1,21 +1,17 @@
 <script lang="ts" setup>
-const route = useRoute()
-const router = useRouter()
-const activeKey = computed(() => route.path)
+const route = useRoute();
+const router = useRouter();
+const activeKey = computed(() => route.path);
 const handleChangePage = (key: any) => {
-  router.push(key)
-}
+  router.push(key);
+};
 </script>
 
 <template>
   <page-container class="search-list-container">
     <template #content>
       <div class="flex items-center justify-center">
-        <a-input-search
-          placeholder="请输入"
-          enter-button="搜索"
-          style="width: 300px"
-        />
+        <a-input-search placeholder="请输入" enter-button="搜索" style="width: 300px" />
       </div>
     </template>
     <template #footer>
@@ -27,16 +23,16 @@ const handleChangePage = (key: any) => {
         </a-tabs>
       </div>
     </template>
-    <slot />
+    <slot></slot>
   </page-container>
 </template>
 
 <style lang="less">
-.search-list-container{
-  .ant-tabs-nav{
+.search-list-container {
+  .ant-tabs-nav {
     margin-bottom: 0;
   }
-  .ant-tabs-nav::before{
+  .ant-tabs-nav::before {
     border-bottom: none;
   }
 }

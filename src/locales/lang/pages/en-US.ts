@@ -2,7 +2,7 @@ export default {
   //  result page
   'result.success.title': 'Submission Success',
   'result.success.description':
-        'The submission results page is used to feed back the results of a series of operational tasks. If it is a simple operation, use the Message global prompt feedback. This text area can show a simple supplementary explanation. If there is a similar requirement for displaying “documents”, the following gray area can present more complicated content.',
+    'The submission results page is used to feed back the results of a series of operational tasks. If it is a simple operation, use the Message global prompt feedback. This text area can show a simple supplementary explanation. If there is a similar requirement for displaying “documents”, the following gray area can present more complicated content.',
   'result.success.operate-title': 'Project Name',
   'result.success.operate-id': 'Project ID',
   'result.success.principal': 'Principal',
@@ -18,8 +18,7 @@ export default {
   'result.success.btn-project': 'View Project',
   'result.success.btn-print': 'Print',
   'result.fail.error.title': 'Submission Failed',
-  'result.fail.error.description':
-        'Please check and modify the following information before resubmitting.',
+  'result.fail.error.description': 'Please check and modify the following information before resubmitting.',
   'result.fail.error.hint-title': 'The content you submitted has the following error:',
   'result.fail.error.hint-text1': 'Your account has been frozen',
   'result.fail.error.hint-btn1': 'Thaw immediately',
@@ -86,7 +85,7 @@ export default {
 
   'form.basic-form.basic.title': 'Basic form',
   'form.basic-form.basic.description':
-      'Form pages are used to collect or verify information to users, and basic forms are common in scenarios where there are fewer data items.',
+    'Form pages are used to collect or verify information to users, and basic forms are common in scenarios where there are fewer data items.',
   'form.basic-form.title.label': 'Title',
   'form.basic-form.title.placeholder': 'Give the target a name',
   'form.basic-form.title.required': 'Please enter a title',
@@ -103,11 +102,10 @@ export default {
   'form.basic-form.client.label': 'Client',
   'form.basic-form.label.tooltip': 'Target service object',
   'form.basic-form.client.placeholder':
-      'Please describe your customer service, internal customers directly {\'@\'}Name / job number',
+    "Please describe your customer service, internal customers directly {'@'}Name / job number",
   'form.basic-form.client.required': 'Please describe the customers you serve',
   'form.basic-form.invites.label': 'Inviting critics',
-  'form.basic-form.invites.placeholder':
-      'Please direct {\'@\'}Name / job number, you can invite up to 5 people',
+  'form.basic-form.invites.placeholder': "Please direct {'@'}Name / job number, you can invite up to 5 people",
   'form.basic-form.weight.label': 'Weight',
   'form.basic-form.weight.placeholder': 'Please enter weight',
   'form.basic-form.public.label': 'Target disclosure',
@@ -124,8 +122,7 @@ export default {
   'form.basic-form.userName.required': 'Please enter your userName!',
   'form.basic-form.password.required': 'Please enter your password!',
   'form.basic-form.password.twice': 'The passwords entered twice do not match!',
-  'form.basic-form.strength.msg':
-      'Please enter at least 6 characters and don\'t use passwords that are easy to guess.',
+  'form.basic-form.strength.msg': "Please enter at least 6 characters and don't use passwords that are easy to guess.",
   'form.basic-form.strength.strong': 'Strength: strong',
   'form.basic-form.strength.medium': 'Strength: medium',
   'form.basic-form.strength.short': 'Strength: too short',
@@ -199,4 +196,4 @@ export default {
   'account.settings.message.desc1': 'Messages from other users will be notified in the form of an internal message',
   'account.settings.message.desc2': 'Messages from other System will be notified in the form of an internal message',
   'account.settings.message.desc3': 'Messages from other task will be notified in the form of an internal message',
-}
+};

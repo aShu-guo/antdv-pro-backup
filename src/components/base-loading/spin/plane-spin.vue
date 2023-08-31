@@ -4,11 +4,11 @@ defineProps({
     type: String,
     default: '#3ff9dc',
   },
-})
+});
 </script>
 
 <template>
-  <div class="plane-wrapper" />
+  <div class="plane-wrapper"></div>
 </template>
 
 <style lang="less" scoped>

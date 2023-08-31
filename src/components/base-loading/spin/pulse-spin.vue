@@ -4,14 +4,14 @@ defineProps({
     type: String,
     default: '#3ff9dc',
   },
-})
+});
 </script>
 
 <template>
   <div class="pulse-wrapper">
-    <div class="pulse-item one" />
-    <div class="pulse-item two" />
-    <div class="pulse-item three" />
+    <div class="pulse-item one"></div>
+    <div class="pulse-item two"></div>
+    <div class="pulse-item three"></div>
   </div>
 </template>
 

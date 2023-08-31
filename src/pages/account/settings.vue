@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import basicSetting from './components/basic-setting.vue'
-import securitySetting from './components/security-setting.vue'
-import accountSetting from './components/account-setting.vue'
-import messageSetting from './components/message-setting.vue'
+import basicSetting from './components/basic-setting.vue';
+import securitySetting from './components/security-setting.vue';
+import accountSetting from './components/account-setting.vue';
+import messageSetting from './components/message-setting.vue';
 
-const { t } = useI18n()
-const selectedKeys = ref(['1'])
+const { t } = useI18n();
+const selectedKeys = ref(['1']);
 
 const items = computed(() => {
   return [
@@ -29,19 +29,19 @@ const items = computed(() => {
       label: seti18n('4'),
       title: 'Navigation Two',
     },
-  ]
-})
+  ];
+});
 
 function seti18n(key: string) {
   switch (key) {
     case '1':
-      return t('account.settings.basic-setting')
+      return t('account.settings.basic-setting');
     case '2':
-      return t('account.settings.security-setting')
+      return t('account.settings.security-setting');
     case '3':
-      return t('account.settings.account-setting')
+      return t('account.settings.account-setting');
     case '4':
-      return t('account.settings.message-setting')
+      return t('account.settings.message-setting');
   }
 }
 </script>
@@ -49,13 +49,8 @@ function seti18n(key: string) {
 <template>
   <a-card>
     <a-row :gutter="24">
-      <a-col :span="4" style="padding-left: 0;">
-        <a-menu
-          v-model:selectedKeys="selectedKeys"
-          style="width: 250px"
-          mode="inline"
-          :items="items"
-        />
+      <a-col :span="4" style="padding-left: 0">
+        <a-menu v-model:selectedKeys="selectedKeys" style="width: 250px" mode="inline" :items="items" />
       </a-col>
       <a-col :span="20">
         <basicSetting v-if="selectedKeys[0] === '1'" />
@@ -67,6 +62,4 @@ function seti18n(key: string) {
   </a-card>
 </template>
 
-<style scoped lang="less">
-
-</style>
+<style scoped lang="less"></style>

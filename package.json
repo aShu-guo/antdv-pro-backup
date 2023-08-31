@@ -12,7 +12,8 @@
     "dev:mockServer": "esno ./scripts/mock-server.ts",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint src --fix",
+    "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
+    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html}\"",
     "typecheck": "vue-tsc --noEmit",
     "bump:patch": "changelogen --bump --output CHANGELOG.md --release --patch",
     "bump:minor": "changelogen --bump --output CHANGELOG.md --release --minor",
@@ -40,12 +41,13 @@
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
-    "@mistjs/eslint-config-vue": "^0.0.5",
     "@types/fs-extra": "^11.0.1",
     "@types/lodash": "^4.14.197",
     "@types/lodash-es": "^4.17.8",
     "@types/node": "^18.17.5",
     "@types/treeify": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "antdv-component-resolver": "^1.0.4",
@@ -54,6 +56,9 @@
     "directory-tree": "^3.5.1",
     "esbuild": "^0.19.2",
     "eslint": "^8.47.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-vue": "^9.17.0",
     "esno": "^0.16.3",
     "execa": "^7.2.0",
     "fs-extra": "^11.1.1",
@@ -63,6 +68,7 @@
     "lodash": "^4.17.21",
     "npm-run-all": "^4.1.5",
     "picocolors": "^1.0.0",
+    "prettier": "^3.0.3",
     "treeify": "^1.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
@@ -72,9 +78,29 @@
     "unplugin-auto-import": "^0.16.6",
     "unplugin-vue-components": "^0.25.1",
     "vite": "^4.4.9",
+    "vue-eslint-parser": "^9.3.1",
     "vue-tsc": "^1.8.8"
   },
   "lint-staged": {
-    "**/*.{vue,ts,js,jsx,tsx}": "eslint src --fix"
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": [
+      "prettier --write--parser json"
+    ],
+    "package.json": [
+      "prettier --write"
+    ],
+    "*.vue": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{scss,less,styl,html}": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
   }
 }

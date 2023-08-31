@@ -1,23 +1,21 @@
 <script setup lang="ts">
-import { CopyrightCircleOutlined } from '@ant-design/icons-vue'
+import { CopyrightCircleOutlined } from '@ant-design/icons-vue';
 defineProps<{
-  copyright?: string
-}>()
+  copyright?: string;
+}>();
 
-const prefixCls = shallowRef('ant-pro-global-footer')
+const prefixCls = shallowRef('ant-pro-global-footer');
 </script>
 
 <template>
   <div :class="prefixCls">
     <div v-if="$slots.renderFooterLinks" :class="`${prefixCls}-links`">
-      <slot name="renderFooterLinks" />
+      <slot name="renderFooterLinks"></slot>
     </div>
-    <div v-if="copyright" :class="`${prefixCls}-copyright`">
-      <CopyrightCircleOutlined /> {{ copyright }}
-    </div>
+    <div v-if="copyright" :class="`${prefixCls}-copyright`"><CopyrightCircleOutlined /> {{ copyright }}</div>
   </div>
 </template>
 
 <style lang="less">
-@import "index";
+@import 'index';
 </style>

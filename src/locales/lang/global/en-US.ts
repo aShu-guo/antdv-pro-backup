@@ -55,8 +55,7 @@ export default {
   'app.setting.weakmode': 'Weak Mode',
   'app.setting.copy': 'Copy Setting',
   'app.setting.copyinfo': 'copy success，please replace default-setting in config/default-setting.js',
-  'app.setting.production.hint':
-    'Setting panel shows in development environment only, please manually modify',
+  'app.setting.production.hint': 'Setting panel shows in development environment only, please manually modify',
   'app.multiTab.title': 'Multi Tab',
   'app.multiTab.closeCurrent': 'Close Current',
   'app.multiTab.closeOther': 'Close Other',
@@ -126,4 +125,4 @@ export default {
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
   'menu.account.logout': 'Logout',
-}
+};

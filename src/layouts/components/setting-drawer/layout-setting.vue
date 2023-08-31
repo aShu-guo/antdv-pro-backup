@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { SelectValue } from 'ant-design-vue/es/select'
-import type { CheckedType, ContentWidth, LayoutType } from '../../basic-layout/typing'
+import type { SelectValue } from 'ant-design-vue/es/select';
+import type { CheckedType, ContentWidth, LayoutType } from '../../basic-layout/typing';
 
 const props = defineProps<{
-  contentWidth?: ContentWidth
-  layout?: LayoutType
-  fixedHeader?: boolean
-  fixedSider?: boolean
-  splitMenus?: boolean
-  keepAlive?: boolean
-  accordionMode?: boolean
-  t?: (key: string, ...args: any[]) => string
-}>()
+  contentWidth?: ContentWidth;
+  layout?: LayoutType;
+  fixedHeader?: boolean;
+  fixedSider?: boolean;
+  splitMenus?: boolean;
+  keepAlive?: boolean;
+  accordionMode?: boolean;
+  t?: (key: string, ...args: any[]) => string;
+}>();
 
-const emit = defineEmits(['changeSetting'])
-const list = computed(() => ([
+const emit = defineEmits(['changeSetting']);
+const list = computed(() => [
   {
     title: '内容区域宽度',
     key: 'contentWidth',
@@ -51,10 +51,10 @@ const list = computed(() => ([
     disabled: false,
     disabledReason: '',
   },
-]))
+]);
 const handleChangeSetting = (key: string, value: any) => {
-  emit('changeSetting', key, value)
-}
+  emit('changeSetting', key, value);
+};
 </script>
 
 <template>
@@ -64,29 +64,59 @@ const handleChangeSetting = (key: string, value: any) => {
         <a-list-item>
           <template #actions>
             <template v-if="item.key === 'contentWidth'">
-              <a-select size="small" :disabled="item.disabled" :value="contentWidth || 'Fluid'" @update:value="(e:SelectValue) => handleChangeSetting('contentWidth', e)">
+              <a-select
+                size="small"
+                :disabled="item.disabled"
+                :value="contentWidth || 'Fluid'"
+                @update:value="(e: SelectValue) => handleChangeSetting('contentWidth', e)"
+              >
                 <a-select-option v-if="layout === 'top'" value="Fixed">
-                  {{ t?.("app.setting.content-width.fixed") ?? 'Fixed' }}
+                  {{ t?.('app.setting.content-width.fixed') ?? 'Fixed' }}
                 </a-select-option>
                 <a-select-option value="Fluid">
-                  {{ t?.("app.setting.content-width.fluid") ?? 'Fluid' }}
+                  {{ t?.('app.setting.content-width.fluid') ?? 'Fluid' }}
                 </a-select-option>
               </a-select>
             </template>
             <template v-if="item.key === 'fixedHeader'">
-              <a-switch size="small" :checked="fixedHeader" :disabled="item.disabled" @update:checked="(e:CheckedType) => handleChangeSetting('fixedHeader', e)" />
+              <a-switch
+                size="small"
+                :checked="fixedHeader"
+                :disabled="item.disabled"
+                @update:checked="(e: CheckedType) => handleChangeSetting('fixedHeader', e)"
+              />
             </template>
             <template v-if="item.key === 'fixSiderbar'">
-              <a-switch size="small" :checked="fixedSider" :disabled="item.disabled" @update:checked="(e:CheckedType) => handleChangeSetting('fixedSider', e)" />
+              <a-switch
+                size="small"
+                :checked="fixedSider"
+                :disabled="item.disabled"
+                @update:checked="(e: CheckedType) => handleChangeSetting('fixedSider', e)"
+              />
             </template>
             <template v-if="item.key === 'splitMenus'">
-              <a-switch size="small" :checked="splitMenus" :disabled="item.disabled" @update:checked="(e:CheckedType) => handleChangeSetting('splitMenus', e)" />
+              <a-switch
+                size="small"
+                :checked="splitMenus"
+                :disabled="item.disabled"
+                @update:checked="(e: CheckedType) => handleChangeSetting('splitMenus', e)"
+              />
             </template>
             <template v-if="item.key === 'keepAlive'">
-              <a-switch size="small" :checked="keepAlive" :disabled="item.disabled" @update:checked="(e:CheckedType) => handleChangeSetting('keepAlive', e)" />
+              <a-switch
+                size="small"
+                :checked="keepAlive"
+                :disabled="item.disabled"
+                @update:checked="(e: CheckedType) => handleChangeSetting('keepAlive', e)"
+              />
             </template>
             <template v-if="item.key === 'accordionMode'">
-              <a-switch size="small" :checked="accordionMode" :disabled="item.disabled" @update:checked="(e:CheckedType) => handleChangeSetting('accordionMode', e)" />
+              <a-switch
+                size="small"
+                :checked="accordionMode"
+                :disabled="item.disabled"
+                @update:checked="(e: CheckedType) => handleChangeSetting('accordionMode', e)"
+              />
             </template>
           </template>
           <span :style="{ opacity: item.disabled ? '0.5' : '1' }">

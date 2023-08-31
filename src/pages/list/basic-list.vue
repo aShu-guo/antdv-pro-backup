@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Modal } from 'ant-design-vue'
-import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
-import { createVNode } from 'vue'
-import dayjs from 'dayjs'
-import { getListApi } from '~@/api/list/basic-list'
+import { Modal } from 'ant-design-vue';
+import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
+import { createVNode } from 'vue';
+import dayjs from 'dayjs';
+import { getListApi } from '~@/api/list/basic-list';
 
 const workData = ref([
   {
@@ -18,32 +18,32 @@ const workData = ref([
     title: '本周完成任务数',
     content: '24个任务',
   },
-])
+]);
 
-const radioValue = ref('a')
+const radioValue = ref('a');
 
-const searchValue = ref()
+const searchValue = ref();
 
 const onSearch = (value: string) => {
-  console.log('use value', value)
-}
+  console.log('use value', value);
+};
 
-const dataSource = ref<any[]>([])
+const dataSource = ref<any[]>([]);
 
 const pagination = ref({
   pageSize: 5,
   pageSizeOptions: ['10', '20', '30', '40', '50'],
   showQuickJumper: true,
   total: 0,
-})
+});
 
 /*
   获取数据
 */
 async function getList() {
-  const data = await getListApi()
-  dataSource.value = data.data ?? []
-  pagination.value.total = data.data?.length ?? 0
+  const data = await getListApi();
+  dataSource.value = data.data ?? [];
+  pagination.value.total = data.data?.length ?? 0;
 }
 
 /*
@@ -53,25 +53,25 @@ const showConfirm = (index: number) => {
   Modal.confirm({
     title: '删除任务',
     icon: createVNode(ExclamationCircleOutlined),
-    content: createVNode('div', { }, '确定要删除该任务吗?'),
+    content: createVNode('div', {}, '确定要删除该任务吗?'),
     cancelText: '取消',
     okText: '确认',
     onOk() {
-      dataSource.value.splice(index, 1)
+      dataSource.value.splice(index, 1);
     },
     class: 'test',
-  })
-}
+  });
+};
 
 /*
   处理编辑弹框
 */
 interface FormState {
-  title: string
-  start: any
-  owner: string
-  description: string
-  index?: number
+  title: string;
+  start: any;
+  owner: string;
+  description: string;
+  index?: number;
 }
 
 const formState = reactive<FormState>({
@@ -80,94 +80,89 @@ const formState = reactive<FormState>({
   owner: '清风不问烟雨',
   description: '',
   index: 0,
-})
+});
 
-const openModalValue = ref(false)
+const openModalValue = ref(false);
 
-const isAdd = ref<boolean>(false)
+const isAdd = ref<boolean>(false);
 
 // 打开对话框
 function openModal(item: any, charge?: boolean) {
   if (charge) {
-    isAdd.value = true
-    openModalValue.value = true
-  }
-  else {
-    isAdd.value = false
-    openModalValue.value = true
-    formState.title = item.title
-    formState.description = item.content
-    formState.start = dayjs(item.start)
-    formState.index = dataSource.value.indexOf(item)
+    isAdd.value = true;
+    openModalValue.value = true;
+  } else {
+    isAdd.value = false;
+    openModalValue.value = true;
+    formState.title = item.title;
+    formState.description = item.content;
+    formState.start = dayjs(item.start);
+    formState.index = dataSource.value.indexOf(item);
   }
 }
 
 // 操作成功后操作
 const countDown = () => {
-  let secondsToGo = 2
+  let secondsToGo = 2;
   const modal = Modal.success({
     title: '操作成功',
     content: `本窗口将在${secondsToGo}后自动关闭`,
-  })
+  });
   const interval = setInterval(() => {
-    secondsToGo -= 1
+    secondsToGo -= 1;
     modal.update({
       content: `本窗口将在${secondsToGo}后自动关闭`,
-    })
-  }, 1000)
+    });
+  }, 1000);
   setTimeout(() => {
-    clearInterval(interval)
-    modal.destroy()
-  }, secondsToGo * 1000)
-}
+    clearInterval(interval);
+    modal.destroy();
+  }, secondsToGo * 1000);
+};
 
 // 确定 处理编辑或添加
 function handleOk() {
   for (const item in formState) {
     if (item !== 'index') {
-      if ((!(formState as any)[item]))
-        return
+      if (!(formState as any)[item]) return;
     }
   }
 
-  const currentIndex = formState.index as number
+  const currentIndex = formState.index as number;
 
   if (isAdd.value) {
     const newItem = {
       title: formState.title,
       content: formState.description,
       start: formState.start.format('YYYY-MM-DD HH:mm'),
-    }
-    dataSource.value.splice(0, 0, newItem)
-  }
-  else {
+    };
+    dataSource.value.splice(0, 0, newItem);
+  } else {
     for (const item in formState) {
-      if (item === 'start')
-        dataSource.value[currentIndex][item] = formState.start.format('YYYY-MM-DD HH:mm')
-      else
-        dataSource.value[currentIndex][item] = (formState as any)[item]
+      if (item === 'start') dataSource.value[currentIndex][item] = formState.start.format('YYYY-MM-DD HH:mm');
+      else dataSource.value[currentIndex][item] = (formState as any)[item];
     }
   }
 
-  openModalValue.value = false
+  openModalValue.value = false;
 
-  cancelModal()
+  cancelModal();
 
-  countDown()
+  countDown();
 }
 
 // 关闭对话框后操作
 function cancelModal() {
-  console.log('cancel')
-  formState.description = ''
-  formState.owner = '清风不问烟雨'
-  formState.start = ''
-  formState.title = ''
+  console.log('cancel');
+  formState.description = '';
+  formState.owner = '清风不问烟雨';
+  formState.start = '';
+  formState.title = '';
 }
 
 onMounted(() => {
-  getList()
-})
+  getList();
+});
 </script>
 
 <template>
@@ -180,7 +175,7 @@ onMounted(() => {
             <div class="text-zinc-400">
               {{ item.title }}
             </div>
-            <div style="font-size: 24px;">
+            <div style="font-size: 24px">
               {{ item.content }}
             </div>
           </div>
@@ -192,22 +187,16 @@ onMounted(() => {
     <a-card class="mt-5">
       <template #title>
         <a-card :bordered="false">
-          <a-row style="font-weight: normal;">
+          <a-row style="font-weight: normal">
             <a-col :span="14">
               <span>基本列表</span>
             </a-col>
             <a-col :span="10" class="flex">
               <div>
                 <a-radio-group v-model:value="radioValue">
-                  <a-radio-button value="a">
-                    全部
-                  </a-radio-button>
-                  <a-radio-button value="b">
-                    进行中
-                  </a-radio-button>
-                  <a-radio-button value="c">
-                    等待中
-                  </a-radio-button>
+                  <a-radio-button value="a"> 全部 </a-radio-button>
+                  <a-radio-button value="b"> 进行中 </a-radio-button>
+                  <a-radio-button value="c"> 等待中 </a-radio-button>
                 </a-radio-group>
               </div>
               <div class="ml-5">
@@ -226,9 +215,7 @@ onMounted(() => {
       <a-list item-layout="horizontal" :data-source="dataSource" :pagination="pagination">
         <template #renderItem="{ item }">
           <a-list-item>
-            <a-list-item-meta
-              :description="item.content"
-            >
+            <a-list-item-meta :description="item.content">
               <template #title>
                 <a href="https://www.antdv.com/">{{ item.title }}</a>
               </template>
@@ -253,13 +240,9 @@ onMounted(() => {
             </template>
             <template #extra>
               <div>
-                <a key="list-loadmore-edit" class="m-4" @click="openModal(item)">
-                  编辑
-                </a>
+                <a key="list-loadmore-edit" class="m-4" @click="openModal(item)"> 编辑 </a>
                 <a-dropdown>
-                  <a class="ant-dropdown-link" @click.prevent>
-                    更多
-                  </a>
+                  <a class="ant-dropdown-link" @click.prevent> 更多 </a>
                   <template #overlay>
                     <a-menu>
                       <a-menu-item>
@@ -279,49 +262,23 @@ onMounted(() => {
     </a-card>
 
     <!-- 底部添加按钮 -->
-    <a-button type="dashed" @click="openModal(null, true)">
-      + 添加
-    </a-button>
+    <a-button type="dashed" @click="openModal(null, true)"> + 添加 </a-button>
 
     <!-- Modal -->
     <a-modal v-model:open="openModalValue" title="任务编辑" @ok="handleOk" @cancel="cancelModal">
-      <a-form
-        :model="formState"
-        name="basic"
-        :label-col="{ span: 24 }"
-        :wrapper-col="{ span: 24 }"
-        autocomplete="off"
-      >
-        <a-form-item
-          label="任务名称"
-          name="title"
-          :rules="[{ required: true, message: '请输入任务名称' }]"
-        >
+      <a-form :model="formState" name="basic" :label-col="{ span: 24 }" :wrapper-col="{ span: 24 }" autocomplete="off">
+        <a-form-item label="任务名称" name="title" :rules="[{ required: true, message: '请输入任务名称' }]">
           <a-input v-model:value="formState.title" />
         </a-form-item>
-        <a-form-item
-          label="开始时间"
-          name="start"
-          :rules="[{ required: true, message: '请选择开始时间' }]"
-        >
+        <a-form-item label="开始时间" name="start" :rules="[{ required: true, message: '请选择开始时间' }]">
           <a-date-picker v-model:value="formState.start" class="w-1/1" show-time />
         </a-form-item>
-        <a-form-item
-          label="任务负责人"
-          name="owner"
-          :rules="[{ required: true, message: '请输入任务负责人' }]"
-        >
+        <a-form-item label="任务负责人" name="owner" :rules="[{ required: true, message: '请输入任务负责人' }]">
           <a-select v-model:value="formState.owner" placeholder="please select your zone">
-            <a-select-option value="owner">
-              清风不问烟雨
-            </a-select-option>
+            <a-select-option value="owner"> 清风不问烟雨 </a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item
-          label="产品描述"
-          name="description"
-          :rules="[{ required: true, message: '请输入产品描述' }]"
-        >
+        <a-form-item label="产品描述" name="description" :rules="[{ required: true, message: '请输入产品描述' }]">
           <a-textarea v-model:value="formState.description" placeholder="Basic usage" :rows="3" />
         </a-form-item>
       </a-form>

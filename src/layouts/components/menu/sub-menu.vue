@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { isFunction, isUrl } from '@v-c/utils'
-import type { VNodeChild } from 'vue'
-import AsyncIcon from './async-icon.vue'
-import type { MenuDataItem } from '~@/layouts/basic-layout/typing'
+import { isFunction, isUrl } from '@v-c/utils';
+import type { VNodeChild } from 'vue';
+import AsyncIcon from './async-icon.vue';
+import type { MenuDataItem } from '~@/layouts/basic-layout/typing';
 withDefaults(defineProps<{ item: MenuDataItem; link?: boolean }>(), {
   link: true,
-})
+});
 const renderTitle = (title: VNodeChild | (() => VNodeChild)) => {
-  if (isFunction(title))
-    return title()
+  if (isFunction(title)) return title();
 
-  return title
-}
+  return title;
+};
 </script>
 
 <template>

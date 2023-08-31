@@ -1,32 +1,32 @@
 <script setup lang="ts">
-import { useLayoutState } from '~/layouts/basic-layout/context.ts'
-const prefixCls = shallowRef('ant-pro-footer-toolbar')
-const { siderWidth: layoutSiderWidth, mobileCollapsed } = useLayoutState()
+import { useLayoutState } from '~/layouts/basic-layout/context.ts';
+const prefixCls = shallowRef('ant-pro-footer-toolbar');
+const { siderWidth: layoutSiderWidth, mobileCollapsed } = useLayoutState();
 defineOptions({
   name: 'FooterToolBar',
-})
+});
 const barWidth = computed(() => {
-  return mobileCollapsed ? undefined : `calc(100% - ${layoutSiderWidth.value}px)`
-})
+  return mobileCollapsed ? undefined : `calc(100% - ${layoutSiderWidth.value}px)`;
+});
 </script>
 
 <template>
   <div :class="prefixCls" :style="{ width: barWidth, transition: '0.3s all' }">
     <div class="footer-tool-bar__left">
-      <slot name="left" />
+      <slot name="left"></slot>
     </div>
     <div class="footer-tool-bar__center">
-      <slot />
+      <slot></slot>
     </div>
     <div class="footer-tool-bar__right">
-      <slot name="right" />
+      <slot name="right"></slot>
     </div>
   </div>
-  <div class="h-56px" />
+  <div class="h-56px"></div>
 </template>
 
 <style scoped lang="less">
-@import "./index.less";
+@import './index.less';
 
 .footer-tool-bar__left {
   float: left;

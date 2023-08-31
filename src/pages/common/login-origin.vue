@@ -1,16 +1,23 @@
 <script setup lang="ts">
-import { AlipayCircleFilled, LockOutlined, MobileOutlined, TaobaoCircleFilled, UserOutlined, WeiboCircleFilled } from '@ant-design/icons-vue'
-import { AxiosError } from 'axios'
-import GlobalLayoutFooter from '~/layouts/components/global-footer/index.vue'
-import { loginApi } from '~/api/common/login'
-import { getQueryParam } from '~/utils/tools'
-import type { LoginMobileParams, LoginParams } from '~@/api/common/login'
-const message = useMessage()
-const notification = useNotification()
-const appStore = useAppStore()
-const { layoutSetting } = storeToRefs(appStore)
-const router = useRouter()
-const token = useAuthorization()
+import {
+  AlipayCircleFilled,
+  LockOutlined,
+  MobileOutlined,
+  TaobaoCircleFilled,
+  UserOutlined,
+  WeiboCircleFilled,
+} from '@ant-design/icons-vue';
+import { AxiosError } from 'axios';
+import GlobalLayoutFooter from '~/layouts/components/global-footer/index.vue';
+import { loginApi } from '~/api/common/login';
+import { getQueryParam } from '~/utils/tools';
+import type { LoginMobileParams, LoginParams } from '~@/api/common/login';
+const message = useMessage();
+const notification = useNotification();
+const appStore = useAppStore();
+const { layoutSetting } = storeToRefs(appStore);
+const router = useRouter();
+const token = useAuthorization();
 const loginModel = reactive({
   username: undefined,
   password: undefined,
@@ -18,87 +25,89 @@ const loginModel = reactive({
   code: undefined,
   type: 'account',
   remember: true,
-})
-const { t } = useI18nLocale()
-const formRef = shallowRef()
-const codeLoading = shallowRef(false)
-const resetCounter = 60
-const submitLoading = shallowRef(false)
-const errorAlert = shallowRef(false)
+});
+const { t } = useI18nLocale();
+const formRef = shallowRef();
+const codeLoading = shallowRef(false);
+const resetCounter = 60;
+const submitLoading = shallowRef(false);
+const errorAlert = shallowRef(false);
 
 const { counter, pause, reset, resume, isActive } = useInterval(1000, {
   controls: true,
   immediate: false,
   callback(count) {
     if (count) {
-      if (count === resetCounter)
-        pause()
+      if (count === resetCounter) pause();
     }
   },
-})
+});
 const getCode = async () => {
-  codeLoading.value = true
+  codeLoading.value = true;
   try {
-    await formRef.value.validate(['mobile'])
+    await formRef.value.validate(['mobile']);
     setTimeout(() => {
-      reset()
-      resume()
-      codeLoading.value = false
-      message.success('验证码是：123456')
-    }, 3000)
-  }
-  catch (error) {
+      reset();
+      resume();
+      codeLoading.value = false;
+      message.success('验证码是：123456');
+    }, 3000);
+  } catch (error) {
     // TODO
-    codeLoading.value = false
+    codeLoading.value = false;
   }
-}
+};
 
 const submit = async () => {
-  submitLoading.value = true
+  submitLoading.value = true;
   try {
-    await formRef.value?.validate()
-    let params: LoginParams | LoginMobileParams
+    await formRef.value?.validate();
+    let params: LoginParams | LoginMobileParams;
 
     if (loginModel.type === 'account') {
       params = {
         username: loginModel.username,
         password: loginModel.password,
-      } as unknown as LoginParams
-    }
-    else {
+      } as unknown as LoginParams;
+    } else {
       params = {
         mobile: loginModel.mobile,
         code: loginModel.code,
         type: 'mobile',
-      } as unknown as LoginMobileParams
+      } as unknown as LoginMobileParams;
     }
-    const { data } = await loginApi(params)
-    token.value = data?.token
+    const { data } = await loginApi(params);
+    token.value = data?.token;
     notification.success({
       message: '登录成功',
       description: '欢迎回来！',
       duration: 3,
-    })
+    });
     // 获取当前是否存在重定向的链接，如果存在就走重定向的地址
-    const redirect = getQueryParam('redirect', '/')
+    const redirect = getQueryParam('redirect', '/');
     router.push({
       path: redirect,
       replace: true,
-    })
-  }
-  catch (e) {
-    if (e instanceof AxiosError)
-      errorAlert.value = true
+    });
+  } catch (e) {
+    if (e instanceof AxiosError) errorAlert.value = true;
 
-    submitLoading.value = false
+    submitLoading.value = false;
   }
-}
+};
 </script>
 
 <template>
   <div class="login-container">
     <div class="login-lang" flex="~" items-center justify-end gap-2 px-24px>
-      <span flex items-center justify-center cursor-pointer text-16px @click="appStore.toggleTheme(layoutSetting.theme === 'dark' ? 'light' : 'dark')">
+      <span
+        flex
+        items-center
+        justify-center
+        cursor-pointer
+        text-16px
+        @click="appStore.toggleTheme(layoutSetting.theme === 'dark' ? 'light' : 'dark')"
+      >
         <!-- 亮色和暗黑模式切换按钮 -->
         <template v-if="layoutSetting.theme === 'light'">
           <carbon-moon />
@@ -114,14 +123,12 @@ const submit = async () => {
         <div class="ant-pro-form-login-top">
           <div class="ant-pro-form-login-header">
             <span class="ant-pro-form-login-logo">
-              <img src="/logo.svg">
+              <img src="/logo.svg" />
             </span>
-            <span class="ant-pro-form-login-title">
-              Antdv Pro
-            </span>
+            <span class="ant-pro-form-login-title"> Antdv Pro </span>
           </div>
           <div class="ant-pro-form-login-desc">
-            {{ t("pages.layouts.userLayout.title") }}
+            {{ t('pages.layouts.userLayout.title') }}
           </div>
         </div>
         <div class="ant-pro-form-login-main" w-335px>
@@ -131,18 +138,42 @@ const submit = async () => {
               <a-tab-pane key="mobile" :tab="t('pages.login.phoneLogin.tab')" />
             </a-tabs>
             <!-- 判断是否存在error -->
-            <a-alert v-if="errorAlert && loginModel.type === 'account'" mb-24px :message="t('pages.login.accountLogin.errorMessage')" type="error" show-icon />
-            <a-alert v-if="errorAlert && loginModel.type === 'mobile'" mb-24px :message="t('pages.login.phoneLogin.errorMessage')" type="error" show-icon />
+            <a-alert
+              v-if="errorAlert && loginModel.type === 'account'"
+              mb-24px
+              :message="t('pages.login.accountLogin.errorMessage')"
+              type="error"
+              show-icon
+            />
+            <a-alert
+              v-if="errorAlert && loginModel.type === 'mobile'"
+              mb-24px
+              :message="t('pages.login.phoneLogin.errorMessage')"
+              type="error"
+              show-icon
+            />
             <template v-if="loginModel.type === 'account'">
               <a-form-item name="username" :rules="[{ required: true, message: t('pages.login.username.required') }]">
-                <a-input v-model:value="loginModel.username" allow-clear :placeholder="t('pages.login.username.placeholder')" size="large" @press-enter="submit">
+                <a-input
+                  v-model:value="loginModel.username"
+                  allow-clear
+                  :placeholder="t('pages.login.username.placeholder')"
+                  size="large"
+                  @press-enter="submit"
+                >
                   <template #prefix>
                     <UserOutlined />
                   </template>
                 </a-input>
               </a-form-item>
               <a-form-item name="password" :rules="[{ required: true, message: t('pages.login.password.required') }]">
-                <a-input-password v-model:value="loginModel.password" allow-clear :placeholder="t('pages.login.password.placeholder')" size="large" @press-enter="submit">
+                <a-input-password
+                  v-model:value="loginModel.password"
+                  allow-clear
+                  :placeholder="t('pages.login.password.placeholder')"
+                  size="large"
+                  @press-enter="submit"
+                >
                   <template #prefix>
                     <LockOutlined />
                   </template>
@@ -151,7 +182,8 @@ const submit = async () => {
             </template>
             <template v-if="loginModel.type === 'mobile'">
               <a-form-item
-                name="mobile" :rules="[
+                name="mobile"
+                :rules="[
                   { required: true, message: t('pages.login.phoneNumber.required') },
                   {
                     pattern: /^(86)?1([38][0-9]|4[579]|5[0-35-9]|6[6]|7[0135678]|9[89])[0-9]{8}$/,
@@ -159,7 +191,13 @@ const submit = async () => {
                   },
                 ]"
               >
-                <a-input v-model:value="loginModel.mobile" allow-clear :placeholder="t('pages.login.phoneNumber.placeholder')" size="large" @press-enter="submit">
+                <a-input
+                  v-model:value="loginModel.mobile"
+                  allow-clear
+                  :placeholder="t('pages.login.phoneNumber.placeholder')"
+                  size="large"
+                  @press-enter="submit"
+                >
                   <template #prefix>
                     <MobileOutlined />
                   </template>
@@ -168,8 +206,12 @@ const submit = async () => {
               <a-form-item name="code" :rules="[{ required: true, message: t('pages.login.captcha.required') }]">
                 <div flex items-center>
                   <a-input
-                    v-model:value="loginModel.code" style="flex: 1 1 0%; transition: width 0.3s ease 0s; margin-right: 8px;"
-                    allow-clear :placeholder="t('pages.login.captcha.placeholder')" size="large" @press-enter="submit"
+                    v-model:value="loginModel.code"
+                    style="flex: 1 1 0%; transition: width 0.3s ease 0s; margin-right: 8px"
+                    allow-clear
+                    :placeholder="t('pages.login.captcha.placeholder')"
+                    size="large"
+                    @press-enter="submit"
                   >
                     <template #prefix>
                       <LockOutlined />
@@ -179,9 +221,7 @@ const submit = async () => {
                     <template v-if="!isActive">
                       {{ t('pages.login.phoneLogin.getVerificationCode') }}
                     </template>
-                    <template v-else>
-                      {{ resetCounter - counter }} {{ t('pages.getCaptchaSecondText') }}
-                    </template>
+                    <template v-else> {{ resetCounter - counter }} {{ t('pages.getCaptchaSecondText') }} </template>
                   </a-button>
                 </div>
               </a-form-item>
@@ -216,7 +256,7 @@ const submit = async () => {
 </template>
 
 <style lang="less" scoped>
-.login-container{
+.login-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -230,22 +270,22 @@ const submit = async () => {
   line-height: 44px;
 }
 
-.login-content{
+.login-content {
   flex: 1 1;
-  padding: 32px 0
+  padding: 32px 0;
 }
-.ant-pro-form-login-container{
+.ant-pro-form-login-container {
   display: flex;
   flex: 1 1;
   flex-direction: column;
   height: 100%;
   padding: 32px 0;
   overflow: auto;
-  background: inherit
+  background: inherit;
 }
 
 .ant-pro-form-login-top {
-  text-align: center
+  text-align: center;
 }
 
 .ant-pro-form-login-header {
@@ -253,11 +293,11 @@ const submit = async () => {
   align-items: center;
   justify-content: center;
   height: 44px;
-  line-height: 44px
+  line-height: 44px;
 }
 
 .ant-pro-form-login-header a {
-  text-decoration: none
+  text-decoration: none;
 }
 
 .ant-pro-form-login-title {
@@ -265,25 +305,25 @@ const submit = async () => {
   top: 2px;
   color: var(--text-color);
   font-weight: 600;
-  font-size: 33px
+  font-size: 33px;
 }
 
 .ant-pro-form-login-logo {
   width: 44px;
   height: 44px;
   margin-right: 16px;
-  vertical-align: top
+  vertical-align: top;
 }
 
 .ant-pro-form-login-logo img {
-  width: 100%
+  width: 100%;
 }
 
 .ant-pro-form-login-desc {
   margin-top: 12px;
   margin-bottom: 40px;
   color: var(--text-color-1);
-  font-size: 14px
+  font-size: 14px;
 }
 
 .ant-pro-form-login-main {
@@ -298,40 +338,40 @@ const submit = async () => {
   .ant-pro-form-login-other {
     margin-top: 24px;
     line-height: 22px;
-    text-align: left
+    text-align: left;
   }
 
-  .icon{
+  .icon {
     margin-left: 8px;
     color: var(--text-color-2);
     font-size: 24px;
     vertical-align: middle;
     cursor: pointer;
-    transition: color .3s;
+    transition: color 0.3s;
 
-    &:hover{
+    &:hover {
       color: var(--pro-ant-color-primary);
     }
   }
 }
 
-@media(min-width: 768px){
-  .login-container{
-    background-image:url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
+@media (min-width: 768px) {
+  .login-container {
+    background-image: url(https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg);
     background-repeat: no-repeat;
     background-position: center 110px;
     background-size: 100%;
   }
 
-  .login-content{
+  .login-content {
     padding: 32px 0 24px;
   }
 
-  .ant-pro-form-login-container{
-    padding:32px 0 24px;
+  .ant-pro-form-login-container {
+    padding: 32px 0 24px;
     background-repeat: no-repeat;
     background-position: center 110px;
-    background-size: 100%
+    background-size: 100%;
   }
 }
 </style>

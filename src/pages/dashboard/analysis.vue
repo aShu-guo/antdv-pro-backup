@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import AnalysisModal from './components/analysis-modal.vue'
-import type { AnalysisModalProps } from './components/interface'
-import type { ListResultModel, ListResultParams } from '~@/api/dashboard/analysis'
-import { delListApi, getListApi } from '~@/api/dashboard/analysis'
-const message = useMessage()
+import AnalysisModal from './components/analysis-modal.vue';
+import type { AnalysisModalProps } from './components/interface';
+import type { ListResultModel, ListResultParams } from '~@/api/dashboard/analysis';
+import { delListApi, getListApi } from '~@/api/dashboard/analysis';
+const message = useMessage();
 const columns = shallowRef([
   {
     title: '#',
@@ -26,46 +26,44 @@ const columns = shallowRef([
     dataIndex: 'action',
     width: 200,
   },
-])
-const loading = shallowRef(false)
-const dataSource = shallowRef<ListResultModel[]>([])
+]);
+const loading = shallowRef(false);
+const dataSource = shallowRef<ListResultModel[]>([]);
 const formModel = reactive<ListResultParams>({
   username: undefined,
   title: undefined,
-})
+});
 
-const actionModalRef = shallowRef()
+const actionModalRef = shallowRef();
 const modalState = reactive<AnalysisModalProps>({
   title: '创建数据',
   open: false,
   type: 'create',
-})
+});
 const init = async () => {
-  if (loading.value) return
-  loading.value = true
+  if (loading.value) return;
+  loading.value = true;
   try {
-    const { data } = await getListApi(formModel)
-    dataSource.value = data ?? []
+    const { data } = await getListApi(formModel);
+    dataSource.value = data ?? [];
+  } catch (e) {
+    console.log(e);
+  } finally {
+    loading.value = false;
   }
-  catch (e) {
-    console.log(e)
-  }
-  finally {
-    loading.value = false
-  }
-}
+};
 
 const onSearch = async () => {
   // todo
-  await init()
-}
+  await init();
+};
 
 const onReset = async () => {
   // 清空所有参数重新请求
-  formModel.username = undefined
-  formModel.title = undefined
-  await init()
-}
+  formModel.username = undefined;
+  formModel.title = undefined;
+  await init();
+};
 
 /**
  * 弹框
@@ -74,39 +72,35 @@ const onReset = async () => {
  */
 const handleAction = (type: AnalysisModalProps['type'], record?: ListResultModel) => {
   if (type === 'edit') {
-    actionModalRef.value.updateModelValue(record)
-    modalState.title = '编辑数据'
+    actionModalRef.value.updateModelValue(record);
+    modalState.title = '编辑数据';
+  } else {
+    modalState.title = '创建数据';
   }
-  else {
-    modalState.title = '创建数据'
-  }
-  modalState.type = type
-  modalState.open = true
-}
+  modalState.type = type;
+  modalState.open = true;
+};
 
 /**
  * 删除数据
  * @param record 数据
  */
 const handleDel = async (record?: ListResultModel) => {
-  const close = message.loading('删除中...')
+  const close = message.loading('删除中...');
   try {
-    const res = await delListApi(record!.id)
-    if (res.code === 200)
-      await init()
-    message.success('删除成功')
+    const res = await delListApi(record!.id);
+    if (res.code === 200) await init();
+    message.success('删除成功');
+  } catch (e) {
+    console.log(e);
+  } finally {
+    close();
   }
-  catch (e) {
-    console.log(e)
-  }
-  finally {
-    close()
-  }
-}
+};
 
 onMounted(() => {
-  init()
-})
+  init();
+});
 </script>
 
 <template>
@@ -127,12 +121,8 @@ onMounted(() => {
           <a-row w-full px-12px>
             <a-col :span="24">
               <a-space flex justify-end w-full>
-                <a-button :loading="loading" type="primary" @click="onSearch">
-                  查询
-                </a-button>
-                <a-button :loading="loading" @click="onReset">
-                  重置
-                </a-button>
+                <a-button :loading="loading" type="primary" @click="onSearch"> 查询 </a-button>
+                <a-button :loading="loading" @click="onReset"> 重置 </a-button>
               </a-space>
             </a-col>
           </a-row>
@@ -143,28 +133,25 @@ onMounted(() => {
     <a-card title="查询表格">
       <template #extra>
         <a-space>
-          <a-button type="primary" @click="handleAction('create')">
-            创建
-          </a-button>
+          <a-button type="primary" @click="handleAction('create')"> 创建 </a-button>
         </a-space>
       </template>
       <a-table :loading="loading" :columns="columns" :data-source="dataSource">
         <template #bodyCell="{ column, record }">
           <template v-if="column.dataIndex === 'action'">
             <div flex gap-2>
-              <a c-primary @click="handleAction('edit', record as any)">
-                编辑
-              </a>
-              <a
-                c-error @click="handleDel(record as any)"
-              >
-                删除
-              </a>
+              <a c-primary @click="handleAction('edit', record as any)"> 编辑 </a>
+              <a c-error @click="handleDel(record as any)"> 删除 </a>
             </div>
           </template>
         </template>
       </a-table>
     </a-card>
-    <AnalysisModal ref="actionModalRef" v-model:open="modalState.open" :type="modalState.type" :title="modalState.title" />
+    <AnalysisModal
+      ref="actionModalRef"
+      v-model:open="modalState.open"
+      :type="modalState.type"
+      :title="modalState.title"
+    />
   </div>
 </template>

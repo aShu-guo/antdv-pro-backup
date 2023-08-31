@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { DingdingOutlined } from '@ant-design/icons-vue'
-import dayjs from 'dayjs'
-const { isMobile } = useQueryBreakpoints()
+import { DingdingOutlined } from '@ant-design/icons-vue';
+import dayjs from 'dayjs';
+const { isMobile } = useQueryBreakpoints();
 
-const { t } = useI18n()
+const { t } = useI18n();
 </script>
 
 <template>
   <a-card :title="t('profile.advanced.step-title')" :bordered="false">
-    <a-steps :current="1" :direction="isMobile && 'horizontal' || 'horizontal'" progress-dot>
+    <a-steps :current="1" :direction="(isMobile && 'horizontal') || 'horizontal'" progress-dot>
       <a-step :title="t('result.success.step1-title')">
         <span class="text-3">{{ t('result.success.step1-title') }}</span>
         <template #description>
@@ -28,7 +28,7 @@ const { t } = useI18n()
         <template #description>
           <div class="text-12px">
             <div style="margin: 8px 0 4px">
-              {{ t("result.success.step2-operator") }}
+              {{ t('result.success.step2-operator') }}
               <DingdingOutlined class="m-1 c-primary" />
             </div>
             <div>
@@ -49,6 +49,4 @@ const { t } = useI18n()
   </a-card>
 </template>
 
-<style scoped lang="less">
-
-</style>
+<style scoped lang="less"></style>

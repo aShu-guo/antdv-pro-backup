@@ -1,29 +1,30 @@
 <script setup lang="ts">
-import { LogoutOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons-vue'
-const message = useMessage()
-const userStore = useUserStore()
-const multiTabStore = useMultiTab()
-const layoutMenuStore = useLayoutMenu()
-const router = useRouter()
-const { avatar, nickname } = storeToRefs(userStore)
+import { LogoutOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons-vue';
+const message = useMessage();
+const userStore = useUserStore();
+const multiTabStore = useMultiTab();
+const layoutMenuStore = useLayoutMenu();
+const router = useRouter();
+const { avatar, nickname } = storeToRefs(userStore);
 const handleClick = async ({ key }: any) => {
   if (key === 'logout') {
-    const hide = message.loading('退出登录...', 0)
+    const hide = message.loading('退出登录...', 0);
     try {
-      await userStore.logout()
-    }
-    finally {
-      hide()
-      message.success('退出登录成功', 3)
-      router.push({
-        path: '/login',
-      }).then(() => {
-        multiTabStore.clear()
-        layoutMenuStore.clear()
-      })
+      await userStore.logout();
+    } finally {
+      hide();
+      message.success('退出登录成功', 3);
+      router
+        .push({
+          path: '/login',
+        })
+        .then(() => {
+          multiTabStore.clear();
+          layoutMenuStore.clear();
+        });
     }
   }
-}
+};
 </script>
 
 <template>
@@ -38,17 +39,13 @@ const handleClick = async ({ key }: any) => {
           <template #icon>
             <UserOutlined />
           </template>
-          <RouterLink to="/account/center">
-            个人中心
-          </RouterLink>
+          <RouterLink to="/account/center"> 个人中心 </RouterLink>
         </a-menu-item>
         <a-menu-item key="1">
           <template #icon>
             <ProfileOutlined />
           </template>
-          <RouterLink to="/account/settings">
-            个人设置
-          </RouterLink>
+          <RouterLink to="/account/settings"> 个人设置 </RouterLink>
         </a-menu-item>
         <a-menu-divider />
         <a-menu-item key="logout">

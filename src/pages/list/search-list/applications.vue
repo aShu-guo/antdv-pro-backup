@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { EditOutlined, EllipsisOutlined, SettingOutlined, ShareAltOutlined } from '@ant-design/icons-vue'
-import Category from './components/category.vue'
+import { EditOutlined, EllipsisOutlined, SettingOutlined, ShareAltOutlined } from '@ant-design/icons-vue';
+import Category from './components/category.vue';
 const list = [
   {
     id: 'fake-list-0',
@@ -15,13 +15,15 @@ const list = [
     updatedAt: 1693313381539,
     createdAt: 1693313381539,
     subDescription: '那是一种内在的东西， 他们到达不了，也无法触及的',
-    description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+    description:
+      '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
     activeUser: 113062,
     newUser: 1303,
     star: 166,
     like: 182,
     message: 20,
-    content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+    content:
+      '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
     members: [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
@@ -53,13 +55,15 @@ const list = [
     updatedAt: 1693306181539,
     createdAt: 1693306181539,
     subDescription: '希望是一个好东西，也许是最好的，好东西是不会消亡的',
-    description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+    description:
+      '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
     activeUser: 120882,
     newUser: 1294,
     star: 161,
     like: 182,
     message: 13,
-    content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+    content:
+      '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
     members: [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
@@ -91,13 +95,15 @@ const list = [
     updatedAt: 1693298981539,
     createdAt: 1693298981539,
     subDescription: '生命就像一盒巧克力，结果往往出人意料',
-    description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+    description:
+      '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
     activeUser: 170883,
     newUser: 1151,
     star: 166,
     like: 139,
     message: 18,
-    content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+    content:
+      '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
     members: [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
@@ -129,13 +135,15 @@ const list = [
     updatedAt: 1693291781539,
     createdAt: 1693291781539,
     subDescription: '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆',
-    description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+    description:
+      '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
     activeUser: 114407,
     newUser: 1076,
     star: 142,
     like: 195,
     message: 13,
-    content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+    content:
+      '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
     members: [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
@@ -167,13 +175,15 @@ const list = [
     updatedAt: 1693284581539,
     createdAt: 1693284581539,
     subDescription: '那时候我只会想自己想要什么，从不想自己拥有什么',
-    description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+    description:
+      '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
     activeUser: 177182,
     newUser: 1752,
     star: 118,
     like: 148,
     message: 11,
-    content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+    content:
+      '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
     members: [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
@@ -205,13 +215,15 @@ const list = [
     updatedAt: 1693277381539,
     createdAt: 1693277381539,
     subDescription: '那是一种内在的东西， 他们到达不了，也无法触及的',
-    description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+    description:
+      '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
     activeUser: 136674,
     newUser: 1841,
     star: 188,
     like: 151,
     message: 14,
-    content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+    content:
+      '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
     members: [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
@@ -243,13 +255,15 @@ const list = [
     updatedAt: 1693270181539,
     createdAt: 1693270181539,
     subDescription: '希望是一个好东西，也许是最好的，好东西是不会消亡的',
-    description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+    description:
+      '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
     activeUser: 122858,
     newUser: 1594,
     star: 189,
     like: 200,
     message: 15,
-    content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+    content:
+      '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
     members: [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
@@ -281,13 +295,15 @@ const list = [
     updatedAt: 1693262981539,
     createdAt: 1693262981539,
     subDescription: '生命就像一盒巧克力，结果往往出人意料',
-    description: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+    description:
+      '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
     activeUser: 100882,
     newUser: 1372,
     star: 185,
     like: 195,
     message: 18,
-    content: '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+    content:
+      '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
     members: [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
@@ -306,7 +322,7 @@ const list = [
       },
     ],
   },
-]
+];
 </script>
 
 <template>
@@ -324,9 +340,7 @@ const list = [
                 <div class="flex">
                   <div class="flex flex-col w-50%">
                     <span>活跃用户</span>
-                    <span class="text-28px c-text">
-                      11 <span class="text-16px">万</span>
-                    </span>
+                    <span class="text-28px c-text"> 11 <span class="text-16px">万</span> </span>
                   </div>
                   <div class="flex flex-col w-50%">
                     <span>新增用户</span>

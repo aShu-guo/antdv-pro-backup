@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { MenuFoldOutlined } from '@ant-design/icons-vue'
-import { useLayoutState } from '../../basic-layout/context'
-import GlobalHeaderLogo from './global-header-logo.vue'
-const { layout, isMobile, handleMobileCollapsed, theme, menuHeader } = useLayoutState()
-const prefixCls = shallowRef('ant-pro-global-header')
+import { MenuFoldOutlined } from '@ant-design/icons-vue';
+import { useLayoutState } from '../../basic-layout/context';
+import GlobalHeaderLogo from './global-header-logo.vue';
+const { layout, isMobile, handleMobileCollapsed, theme, menuHeader } = useLayoutState();
+const prefixCls = shallowRef('ant-pro-global-header');
 const cls = computed(() => ({
   [prefixCls.value]: true,
   [`${prefixCls.value}-layout-${layout.value}`]: !!layout.value,
   [`${prefixCls.value}-inverted`]: theme.value === 'inverted' && layout.value === 'top',
-}))
+}));
 </script>
 
 <template>
@@ -20,14 +20,14 @@ const cls = computed(() => ({
       <MenuFoldOutlined />
     </span>
     <div class="flex-1 overflow-x-auto" :class="layout === 'top' ? `${prefixCls}-top` : ''">
-      <slot name="headerContent" />
+      <slot name="headerContent"></slot>
     </div>
     <a-space align="center" flex-shrink-0>
-      <slot name="headerActions" />
+      <slot name="headerActions"></slot>
     </a-space>
   </div>
 </template>
 
 <style lang="less">
-@import "./index.less";
+@import './index.less';
 </style>

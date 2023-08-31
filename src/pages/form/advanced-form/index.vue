@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import RepositoryForm from './repository-form.vue'
-import TaskForm from './task-form.vue'
+import RepositoryForm from './repository-form.vue';
+import TaskForm from './task-form.vue';
 
-const repositoryFormRef = ref()
-const taskFormRef = ref()
+const repositoryFormRef = ref();
+const taskFormRef = ref();
 async function handleSubmit() {
   try {
-    await taskFormRef.value?.handleSubmit()
-    await repositoryFormRef.value?.handleSubmit()
-  }
-  catch (errorInfo) {
-    console.log('Failed:', errorInfo)
+    await taskFormRef.value?.handleSubmit();
+    await repositoryFormRef.value?.handleSubmit();
+  } catch (errorInfo) {
+    console.log('Failed:', errorInfo);
   }
 }
 
@@ -66,9 +65,9 @@ const state = reactive({
       department: '财务部',
     },
   ],
-})
+});
 const handleAdd = () => {
-  const key = state.data.length === 0 ? '1' : (parseInt(state.data[state.data.length - 1].key) + 1).toString()
+  const key = state.data.length === 0 ? '1' : (parseInt(state.data[state.data.length - 1].key) + 1).toString();
   const newData = {
     key,
     name: `员工${key}`,
@@ -76,19 +75,17 @@ const handleAdd = () => {
     workId: parseInt(key) < 10 ? `00${key}` : parseInt(key) < 100 ? `0${key}` : key,
     editable: true,
     department: ['行政部', 'IT部', '财务部'][Math.floor(Math.random() * 3)],
-  }
-  state.data.push(newData)
-}
+  };
+  state.data.push(newData);
+};
 const remove = (key: string) => {
-  state.data = state.data.filter(item => item.key !== key)
-}
+  state.data = state.data.filter((item) => item.key !== key);
+};
 </script>
 
 <template>
   <page-container>
-    <template #content>
-      高级表单常见于一次性输入和提交大批量数据的场景。
-    </template>
+    <template #content> 高级表单常见于一次性输入和提交大批量数据的场景。 </template>
     <a-space size="large" direction="vertical" :style="{ width: '100%' }">
       <a-card class="card" title="仓库管理" :bordered="false">
         <RepositoryForm ref="repositoryFormRef" :show-submit="false" />
@@ -97,18 +94,10 @@ const remove = (key: string) => {
         <TaskForm ref="taskFormRef" :show-submit="false" />
       </a-card>
       <a-card>
-        <a-table
-          :columns="state.columns"
-          :data-source="state.data"
-          :pagination="false"
-        >
+        <a-table :columns="state.columns" :data-source="state.data" :pagination="false">
           <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'action'">
-              <a-popconfirm
-                v-if="state.data.length"
-                title="Sure to delete?"
-                @confirm="remove(record.key)"
-              >
+              <a-popconfirm v-if="state.data.length" title="Sure to delete?" @confirm="remove(record.key)">
                 <a>Delete</a>
               </a-popconfirm>
             </template>
@@ -121,9 +110,7 @@ const remove = (key: string) => {
     </a-space>
     <FooterToolBar>
       <template #right>
-        <a-button type="primary" @click="handleSubmit">
-          提交
-        </a-button>
+        <a-button type="primary" @click="handleSubmit"> 提交 </a-button>
       </template>
     </FooterToolBar>
   </page-container>

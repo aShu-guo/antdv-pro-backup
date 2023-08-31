@@ -1,75 +1,72 @@
 <script setup lang="ts">
-import type { AnalysisModalProps } from './interface'
-import type { CreateListParams } from '~/api/dashboard/analysis'
-import { createListApi, editListApi } from '~/api/dashboard/analysis'
+import type { AnalysisModalProps } from './interface';
+import type { CreateListParams } from '~/api/dashboard/analysis';
+import { createListApi, editListApi } from '~/api/dashboard/analysis';
 const props = withDefaults(defineProps<AnalysisModalProps>(), {
   type: 'create',
-})
+});
 const emit = defineEmits<{
-  'update:open': [boolean]
-}>()
-const message = useMessage()
-const loading = shallowRef(false)
+  'update:open': [boolean];
+}>();
+const message = useMessage();
+const loading = shallowRef(false);
 
 defineOptions({
   inheritAttrs: false,
-})
+});
 
 const formModel = reactive({
   id: undefined,
   username: undefined,
   password: undefined,
   title: undefined,
-})
+});
 
 const reset = () => {
-  formModel.password = undefined
-  formModel.username = undefined
-  formModel.title = undefined
-}
+  formModel.password = undefined;
+  formModel.username = undefined;
+  formModel.title = undefined;
+};
 
 const handleUpdateOpen = (open: boolean) => {
-  reset()
-  emit('update:open', open)
-}
+  reset();
+  emit('update:open', open);
+};
 
 const handleSubmit = async () => {
-  if (loading.value) return
-  loading.value = true
-  const close = message.loading(props.type === 'edit' ? '编辑中...' : '创建中...')
+  if (loading.value) return;
+  loading.value = true;
+  const close = message.loading(props.type === 'edit' ? '编辑中...' : '创建中...');
   try {
-    let res
-    if (props.type === 'edit')
-      res = await editListApi(formModel as any)
-    else
-      res = await createListApi(formModel)
+    let res;
+    if (props.type === 'edit') res = await editListApi(formModel as any);
+    else res = await createListApi(formModel);
 
     if (res.code === 200) {
-      message.success(props.type === 'edit' ? '编辑成功' : '创建成功')
-      handleUpdateOpen(false)
+      message.success(props.type === 'edit' ? '编辑成功' : '创建成功');
+      handleUpdateOpen(false);
     }
+  } catch (e) {
+    console.log('e', e);
+  } finally {
+    loading.value = false;
+    close();
   }
-  catch (e) {
-    console.log('e', e)
-  }
-  finally {
-    loading.value = false
-    close()
-  }
-}
+};
 
 const updateModelValue = (model: CreateListParams) => {
-  Object.assign(formModel, model)
-}
+  Object.assign(formModel, model);
+};
 
 defineExpose({
   updateModelValue,
-})
+});
 </script>
 
 <template>
   <a-modal
-    :open="open" :title="title"
+    :open="open"
+    :title="title"
     ok-text="提交"
     :width="800"
     :ok-button-props="{

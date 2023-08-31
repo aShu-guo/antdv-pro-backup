@@ -1,17 +1,17 @@
 export interface LoginParams {
-  username: string
-  password: string
-  type?: 'account'
+  username: string;
+  password: string;
+  type?: 'account';
 }
 
 export interface LoginMobileParams {
-  mobile: string
-  code: string
-  type: 'mobile'
+  mobile: string;
+  code: string;
+  type: 'mobile';
 }
 
 export interface LoginResultModel {
-  token: string
+  token: string;
 }
 
 export const loginApi = (params: LoginParams | LoginMobileParams) => {
@@ -22,9 +22,9 @@ export const loginApi = (params: LoginParams | LoginMobileParams) => {
     customDev: true,
     // 是否开启全局请求loading
     loading: true,
-  })
-}
+  });
+};
 
 export const logoutApi = () => {
-  return useGet('/logout')
-}
+  return useGet('/logout');
+};

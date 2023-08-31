@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  title?: string
-}>()
+  title?: string;
+}>();
 </script>
 
 <template>
@@ -9,6 +9,6 @@ defineProps<{
     <h3 font-500 mb-12px text-14px line-height-22px>
       {{ title }}
     </h3>
-    <slot />
+    <slot></slot>
   </div>
 </template>

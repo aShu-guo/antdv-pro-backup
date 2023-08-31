@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import type { SelectValue } from 'ant-design-vue/es/select'
-import type { CheckedType, LayoutType } from '../../basic-layout/typing'
+import type { SelectValue } from 'ant-design-vue/es/select';
+import type { CheckedType, LayoutType } from '../../basic-layout/typing';
 
 const props = defineProps<{
-  layout?: LayoutType
-  header?: boolean
-  footer?: boolean
-  menu?: boolean
-  menuHeader?: boolean
-  multiTab?: boolean
-  multiTabFixed?: boolean
-  animationName?: string
-  animationNameList?: any[]
-  t?: (key: string, ...args: any[]) => string
-}>()
+  layout?: LayoutType;
+  header?: boolean;
+  footer?: boolean;
+  menu?: boolean;
+  menuHeader?: boolean;
+  multiTab?: boolean;
+  multiTabFixed?: boolean;
+  animationName?: string;
+  animationNameList?: any[];
+  t?: (key: string, ...args: any[]) => string;
+}>();
 
-const emit = defineEmits(['changeSetting'])
-const list = computed(() => ([
+const emit = defineEmits(['changeSetting']);
+const list = computed(() => [
   {
     title: '动画',
     key: 'animationName',
@@ -59,10 +59,10 @@ const list = computed(() => ([
     disabled: false,
     disabledReason: '多页签开启后功能正常使用',
   },
-]))
+]);
 const handleChangeSetting = (key: string, value: any) => {
-  emit('changeSetting', key, value)
-}
+  emit('changeSetting', key, value);
+};
 </script>
 
 <template>
@@ -76,13 +76,15 @@ const handleChangeSetting = (key: string, value: any) => {
               size="small"
               :checked="(props as any)[item.key]"
               :disabled="item.disabled"
-              @update:checked="(e:CheckedType) => handleChangeSetting(item.key, e)"
+              @update:checked="(e: CheckedType) => handleChangeSetting(item.key, e)"
             />
             <a-select
-              v-else style="width: 120px;"
+              v-else
+              style="width: 120px"
               :value="animationName"
-              :options="animationNameList" size="small"
-              @update:value="(e:SelectValue) => handleChangeSetting(item.key, e)"
+              :options="animationNameList"
+              size="small"
+              @update:value="(e: SelectValue) => handleChangeSetting(item.key, e)"
             />
           </template>
           <span :style="{ opacity: item.disabled ? '0.5' : '1' }">

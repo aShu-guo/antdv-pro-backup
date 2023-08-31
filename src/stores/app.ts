@@ -1,37 +1,37 @@
-import type { ThemeConfig } from 'ant-design-vue/es/config-provider/context'
-import { theme as antdTheme } from 'ant-design-vue/es'
-import type { ContentWidth, LayoutType, ThemeType } from '~@/layouts/basic-layout/typing'
-import type { AnimationNameValueType } from '~@/config/default-setting'
-import defaultSetting from '~@/config/default-setting'
+import type { ThemeConfig } from 'ant-design-vue/es/config-provider/context';
+import { theme as antdTheme } from 'ant-design-vue/es';
+import type { ContentWidth, LayoutType, ThemeType } from '~@/layouts/basic-layout/typing';
+import type { AnimationNameValueType } from '~@/config/default-setting';
+import defaultSetting from '~@/config/default-setting';
 
 export interface LayoutSetting {
-  title?: string
-  logo?: string
-  theme: ThemeType
-  collapsed: boolean
-  drawerVisible: boolean
-  colorPrimary?: string
-  layout?: LayoutType
-  contentWidth?: ContentWidth
-  fixedHeader?: boolean
-  fixedSider?: boolean
-  splitMenus?: boolean
-  header?: boolean
-  footer?: boolean
-  menu?: boolean
-  menuHeader?: boolean
-  colorWeak?: boolean
-  multiTab?: boolean
-  multiTabFixed?: boolean
-  headerHeight?: number
-  copyright?: string
-  keepAlive?: boolean
-  accordionMode?: boolean
-  animationName?: AnimationNameValueType
+  title?: string;
+  logo?: string;
+  theme: ThemeType;
+  collapsed: boolean;
+  drawerVisible: boolean;
+  colorPrimary?: string;
+  layout?: LayoutType;
+  contentWidth?: ContentWidth;
+  fixedHeader?: boolean;
+  fixedSider?: boolean;
+  splitMenus?: boolean;
+  header?: boolean;
+  footer?: boolean;
+  menu?: boolean;
+  menuHeader?: boolean;
+  colorWeak?: boolean;
+  multiTab?: boolean;
+  multiTabFixed?: boolean;
+  headerHeight?: number;
+  copyright?: string;
+  keepAlive?: boolean;
+  accordionMode?: boolean;
+  animationName?: AnimationNameValueType;
 }
 
 export const useAppStore = defineStore('app', () => {
-  const layoutSetting = reactive<LayoutSetting>(defaultSetting)
+  const layoutSetting = reactive<LayoutSetting>(defaultSetting);
   const themeConfig = reactive<ThemeConfig>({
     algorithm: antdTheme.defaultAlgorithm,
     token: {
@@ -39,26 +39,21 @@ export const useAppStore = defineStore('app', () => {
       colorPrimary: layoutSetting.colorPrimary,
     },
     components: {},
-  })
+  });
   const toggleTheme = (theme: ThemeType) => {
-    if (layoutSetting.theme === theme)
-      return
+    if (layoutSetting.theme === theme) return;
 
-    layoutSetting.theme = theme
+    layoutSetting.theme = theme;
     if (theme === 'light' || theme === 'inverted') {
-      if (themeConfig.token)
-        themeConfig.token.colorBgContainer = '#fff'
-      if (themeConfig.components?.Menu)
-        delete themeConfig.components.Menu
+      if (themeConfig.token) themeConfig.token.colorBgContainer = '#fff';
+      if (themeConfig.components?.Menu) delete themeConfig.components.Menu;
 
-      themeConfig.algorithm = antdTheme.defaultAlgorithm
+      themeConfig.algorithm = antdTheme.defaultAlgorithm;
 
-      toggleDark(false)
-    }
-    else if (theme === 'dark') {
-      toggleDark(true)
-      if (themeConfig.token)
-        themeConfig.token.colorBgContainer = 'rgb(36, 37, 37)'
+      toggleDark(false);
+    } else if (theme === 'dark') {
+      toggleDark(true);
+      if (themeConfig.token) themeConfig.token.colorBgContainer = 'rgb(36, 37, 37)';
       if (themeConfig.components) {
         themeConfig.components = {
           ...themeConfig.components,
@@ -67,63 +62,51 @@ export const useAppStore = defineStore('app', () => {
             colorSubItemBg: 'rgb(36, 37, 37)',
             menuSubMenuBg: 'rgb(36, 37, 37)',
           } as any,
-        }
+        };
       }
-      themeConfig.algorithm = antdTheme.darkAlgorithm
+      themeConfig.algorithm = antdTheme.darkAlgorithm;
     }
-  }
+  };
 
   const toggleDrawerVisible = (visible: boolean) => {
-    layoutSetting.drawerVisible = visible
-  }
+    layoutSetting.drawerVisible = visible;
+  };
 
   const toggleColorPrimary = (color: string) => {
-    layoutSetting.colorPrimary = color
-    if (themeConfig.token)
-      themeConfig.token.colorPrimary = color
-  }
+    layoutSetting.colorPrimary = color;
+    if (themeConfig.token) themeConfig.token.colorPrimary = color;
+  };
 
   // 如果加载进来是暗色模式，就切换到暗色模式
-  if (isDark.value)
-    toggleTheme('dark')
+  if (isDark.value) toggleTheme('dark');
 
   // 监听isDark的变化
   watch(isDark, () => {
-    if (isDark.value)
-      toggleTheme('dark')
-    else
-      toggleTheme('light')
-  })
+    if (isDark.value) toggleTheme('dark');
+    else toggleTheme('light');
+  });
 
   const toggleCollapsed = (collapsed: boolean) => {
-    layoutSetting.collapsed = collapsed
-  }
+    layoutSetting.collapsed = collapsed;
+  };
 
   const toggleLayout = (layout: LayoutType) => {
-    if (layoutSetting.theme === 'inverted' && layout === 'mix')
-      layoutSetting.theme = 'light'
+    if (layoutSetting.theme === 'inverted' && layout === 'mix') layoutSetting.theme = 'light';
 
-    if (layout !== 'mix')
-      layoutSetting.splitMenus = false
+    if (layout !== 'mix') layoutSetting.splitMenus = false;
 
-    if (layout === 'top')
-      layoutSetting.contentWidth = 'Fixed'
-    else
-      layoutSetting.contentWidth = 'Fluid'
+    if (layout === 'top') layoutSetting.contentWidth = 'Fixed';
+    else layoutSetting.contentWidth = 'Fluid';
 
-    layoutSetting.layout = layout
-  }
+    layoutSetting.layout = layout;
+  };
 
   const changeSettingLayout = (key: keyof LayoutSetting, value: any) => {
-    if (key === 'theme')
-      toggleTheme(value as ThemeType)
-    else if (key === 'colorPrimary')
-      toggleColorPrimary(value)
-    else if (key === 'layout')
-      toggleLayout(value as LayoutType)
-    else if (key in layoutSetting)
-      (layoutSetting as any)[key] = value
-  }
+    if (key === 'theme') toggleTheme(value as ThemeType);
+    else if (key === 'colorPrimary') toggleColorPrimary(value);
+    else if (key === 'layout') toggleLayout(value as LayoutType);
+    else if (key in layoutSetting) (layoutSetting as any)[key] = value;
+  };
 
   return {
     layoutSetting,
@@ -133,5 +116,5 @@ export const useAppStore = defineStore('app', () => {
     toggleDrawerVisible,
     changeSettingLayout,
     toggleColorPrimary,
-  }
-})
+  };
+});

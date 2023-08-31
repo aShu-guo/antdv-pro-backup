@@ -1,23 +1,33 @@
 <script setup lang="ts">
-import { pick } from '@v-c/utils'
-import BasicLayout from './basic-layout/index.vue'
-import SettingDrawer from './components/setting-drawer/index.vue'
-import MultiTab from './multi-tab/index.vue'
-import { animationNameList } from '~@/config/default-setting'
-const appStore = useAppStore()
-const { layoutSetting } = storeToRefs(appStore)
-const userStore = useUserStore()
-const layoutMenu = useLayoutMenu()
-const { t } = useI18nLocale()
-const { selectedKeys, openKeys } = storeToRefs(layoutMenu)
-const { isMobile, isPad } = useQueryBreakpoints()
+import { pick } from '@v-c/utils';
+import BasicLayout from './basic-layout/index.vue';
+import SettingDrawer from './components/setting-drawer/index.vue';
+import MultiTab from './multi-tab/index.vue';
+import { animationNameList } from '~@/config/default-setting';
+const appStore = useAppStore();
+const { layoutSetting } = storeToRefs(appStore);
+const userStore = useUserStore();
+const layoutMenu = useLayoutMenu();
+const { t } = useI18nLocale();
+const { selectedKeys, openKeys } = storeToRefs(layoutMenu);
+const { isMobile, isPad } = useQueryBreakpoints();
 watch(isPad, (val) => {
-  if (val)
-    appStore.toggleCollapsed(true)
-  else
-    appStore.toggleCollapsed(false)
-})
-const layoutProps = computed(() => pick(appStore.layoutSetting, ['fixedHeader', 'fixedSider', 'splitMenus', 'menuHeader', 'header', 'menu', 'layout', 'footer', 'contentWidth']))
+  if (val) appStore.toggleCollapsed(true);
+  else appStore.toggleCollapsed(false);
+});
+const layoutProps = computed(() =>
+  pick(appStore.layoutSetting, [
+    'fixedHeader',
+    'fixedSider',
+    'splitMenus',
+    'menuHeader',
+    'header',
+    'menu',
+    'layout',
+    'footer',
+    'contentWidth',
+  ]),
+);
 </script>
 
 <template>
@@ -27,7 +37,7 @@ const layoutProps = computed(() => pick(appStore.layoutSetting, ['fixedHeader', 
     :menu-data="userStore.menuData"
     v-bind="layoutProps"
     :selected-keys="selectedKeys"
-    :open-keys=" layoutSetting.layout === 'top' ? [] : openKeys"
+    :open-keys="layoutSetting.layout === 'top' ? [] : openKeys"
     :copyright="layoutSetting.copyright"
     :is-mobile="isMobile"
     :logo="layoutSetting.logo"
@@ -51,7 +61,7 @@ const layoutProps = computed(() => pick(appStore.layoutSetting, ['fixedHeader', 
       <MultiTab v-if="layoutSetting.multiTab" />
     </template>
 
-    <template #renderFooterLinks />
+    <template #renderFooterLinks></template>
     <a-watermark h-full flex flex-col flex-1 :content="layoutSetting.title ?? 'Antdv Pro'">
       <RouterView>
         <template #default="{ Component }">
@@ -78,6 +88,4 @@ const layoutProps = computed(() => pick(appStore.layoutSetting, ['fixedHeader', 
   />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

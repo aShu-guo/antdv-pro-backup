@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <div class="preloader-wrapper" />
+  <div class="preloader-wrapper"></div>
 </template>
 
 <style lang="less" scoped>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const appStore = useAppStore()
-const { theme } = storeToRefs(appStore)
-const { antd } = useI18nLocale()
+const appStore = useAppStore();
+const { theme } = storeToRefs(appStore);
+const { antd } = useI18nLocale();
 </script>
 
 <template>

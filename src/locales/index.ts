@@ -1,7 +1,7 @@
-import { createI18n } from 'vue-i18n'
-import zhCN from './lang/zh-CN'
+import { createI18n } from 'vue-i18n';
+import zhCN from './lang/zh-CN';
 
-export const defaultLocale = 'zh-CN'
+export const defaultLocale = 'zh-CN';
 
 const i18n = createI18n({
   legacy: false,
@@ -14,7 +14,7 @@ const i18n = createI18n({
   messages: {
     'zh-CN': zhCN,
   },
-})
+});
 
 /**
  * 异步加载其他多语言
@@ -23,17 +23,16 @@ const i18n = createI18n({
  */
 
 export const loadLanguageAsync = async (locale: string) => {
-  const current = i18n.global.locale.value
+  const current = i18n.global.locale.value;
   try {
-    if (current === locale) return nextTick()
+    if (current === locale) return nextTick();
 
-    const messages = await import(`./lang/${locale}.ts`)
-    if (messages) i18n.global.setLocaleMessage(locale, messages.default)
+    const messages = await import(`./lang/${locale}.ts`);
+    if (messages) i18n.global.setLocaleMessage(locale, messages.default);
+  } catch (e) {
+    console.warn('load language error', e);
   }
-  catch (e) {
-    console.warn('load language error', e)
-  }
-  return nextTick()
-}
+  return nextTick();
+};
 
-export default i18n
+export default i18n;

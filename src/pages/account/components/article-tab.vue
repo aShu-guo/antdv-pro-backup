@@ -1,15 +1,15 @@
 <script setup lang="ts">
 interface IDataItem {
-  title: string
-  tags: string[]
-  content: string
+  title: string;
+  tags: string[];
+  content: string;
 }
 
 defineProps<{
-  dataSource: IDataItem[]
-}>()
+  dataSource: IDataItem[];
+}>();
 
-const { t } = useI18n()
+const { t } = useI18n();
 </script>
 
 <template>
@@ -34,20 +34,16 @@ const { t } = useI18n()
             <span class="flex items-center">
               <a-avatar :size="20" class="mr-2">
                 <template #icon>
-                  <img src="/logo.svg" alt="">
+                  <img src="/logo.svg" alt="" />
                 </template>
               </a-avatar>
-              <span style="color: rgb(22, 119, 255);">
-                张三
-              </span>
+              <span style="color: rgb(22, 119, 255)"> 张三 </span>
             </span>
             <span class="mx-1">
               {{ t('account.center.posted') }}
             </span>
             <span>
-              <a-button type="link" href="https://www.antdv-pro.com/">
-                https://www.antdv-pro.com/
-              </a-button>
+              <a-button type="link" href="https://www.antdv-pro.com/"> https://www.antdv-pro.com/ </a-button>
             </span>
           </div>
         </div>

@@ -1,62 +1,55 @@
 <script setup lang="ts">
-import { delayTimer, isFunction } from '@v-c/utils'
-import type { VNodeChild } from 'vue'
-import { useLayoutState } from '~/layouts/basic-layout/context'
+import { delayTimer, isFunction } from '@v-c/utils';
+import type { VNodeChild } from 'vue';
+import { useLayoutState } from '~/layouts/basic-layout/context';
 defineProps<{
-  title?: string
-}>()
+  title?: string;
+}>();
 defineSlots<{
-  default(props: any): any
-  title(props: any): any
-  content(props: any): any
-  extraContent(props: any): any
-  extra(props: any): any
-  footer(props: any): any
-}>()
-const layoutMenuStore = useLayoutMenu()
-const { menuDataMap, selectedKeys } = storeToRefs(layoutMenuStore)
+  default(props: any): any;
+  title(props: any): any;
+  content(props: any): any;
+  extraContent(props: any): any;
+  extra(props: any): any;
+  footer(props: any): any;
+}>();
+const layoutMenuStore = useLayoutMenu();
+const { menuDataMap, selectedKeys } = storeToRefs(layoutMenuStore);
 const currentItem = computed(() => {
-  const key: string = selectedKeys.value.length ? selectedKeys.value[0] : ''
-  if (key && menuDataMap.value.has(key))
-    return menuDataMap.value.get(key)
-  return {} as any
-})
-const { contentWidth, hasPageContainer } = useLayoutState()
+  const key: string = selectedKeys.value.length ? selectedKeys.value[0] : '';
+  if (key && menuDataMap.value.has(key)) return menuDataMap.value.get(key);
+  return {} as any;
+});
+const { contentWidth, hasPageContainer } = useLayoutState();
 
 onMounted(async () => {
-  await delayTimer(300)
-  hasPageContainer.value = true
-})
+  await delayTimer(300);
+  hasPageContainer.value = true;
+});
 onUnmounted(async () => {
-  await delayTimer(300)
-  hasPageContainer.value = false
-})
+  await delayTimer(300);
+  hasPageContainer.value = false;
+});
 onActivated(async () => {
-  await delayTimer(300)
-  hasPageContainer.value = true
-})
+  await delayTimer(300);
+  hasPageContainer.value = true;
+});
 onDeactivated(async () => {
-  await delayTimer(300)
-  hasPageContainer.value = false
-})
+  await delayTimer(300);
+  hasPageContainer.value = false;
+});
 const contentCls = computed(() => {
-  const cls: string[] = [
-    'flex flex-col flex-1',
-  ]
-  if (contentWidth.value === 'Fluid')
-    cls.push('w-full')
+  const cls: string[] = ['flex flex-col flex-1'];
+  if (contentWidth.value === 'Fluid') cls.push('w-full');
+  else if (contentWidth.value === 'Fixed') cls.push(...['max-w-1200px w-1200px', 'mx-auto']);
 
-  else if (contentWidth.value === 'Fixed')
-    cls.push(...['max-w-1200px w-1200px', 'mx-auto'])
-
-  return cls
-})
+  return cls;
+});
 const renderTitle = (title: VNodeChild | (() => VNodeChild)) => {
-  if (isFunction(title))
-    return title()
+  if (isFunction(title)) return title();
 
-  return title
-}
+  return title;
+};
 </script>
 
 <template>
@@ -75,27 +68,29 @@ const renderTitle = (title: VNodeChild | (() => VNodeChild)) => {
       <div flex mt-8px justify-between>
         <div flex items-center my-4px of-hidden>
           <slot name="title">
-            <span text-20px line-height-32px mr-12px mb-0 truncate font-600>{{ renderTitle(title ?? currentItem.title) }}</span>
+            <span text-20px line-height-32px mr-12px mb-0 truncate font-600>{{
+              renderTitle(title ?? currentItem.title)
+            }}</span>
           </slot>
         </div>
         <div>
-          <slot name="extra" />
+          <slot name="extra"></slot>
         </div>
       </div>
       <div v-if="$slots.content || $slots.extraContent" pt-12px>
         <div flex w-full>
           <div flex-auto>
-            <slot name="content" />
+            <slot name="content"></slot>
           </div>
           <div flex-shrink-0>
-            <slot name="extraContent" />
+            <slot name="extraContent"></slot>
           </div>
         </div>
       </div>
-      <slot name="footer" />
+      <slot name="footer"></slot>
     </div>
     <div :class="contentCls">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

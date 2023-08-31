@@ -2,7 +2,7 @@ export default {
   //   结果页
   'result.success.title': '提交成功',
   'result.success.description':
-        '提交结果页用于反馈一系列操作任务的处理结果， 如果仅是简单操作，使用 Message 全局提示反馈即可。 本文字区域可以展示简单的补充说明，如果有类似展示 “单据”的需求，下面这个灰色区域可以呈现比较复杂的内容。',
+    '提交结果页用于反馈一系列操作任务的处理结果， 如果仅是简单操作，使用 Message 全局提示反馈即可。 本文字区域可以展示简单的补充说明，如果有类似展示 “单据”的需求，下面这个灰色区域可以呈现比较复杂的内容。',
   'result.success.operate-title': '项目名称',
   'result.success.operate-id': '项目 ID',
   'result.success.principal': '负责人',
@@ -86,8 +86,7 @@ export default {
   'profile.advanced.step-notice': '催一下',
 
   'form.basic-form.basic.title': '基础表单',
-  'form.basic-form.basic.description':
-      '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
+  'form.basic-form.basic.description': '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
   'form.basic-form.title.label': '标题',
   'form.basic-form.title.placeholder': '给目标起个名字',
   'form.basic-form.title.required': '请输入标题',
@@ -104,9 +103,9 @@ export default {
   'form.basic-form.client.label': '客户',
   'form.basic-form.client.required': '请描述你服务的客户',
   'form.basic-form.label.tooltip': '目标的服务对象',
-  'form.basic-form.client.placeholder': '请描述你服务的客户，内部客户直接 {\'@\'}姓名／工号',
+  'form.basic-form.client.placeholder': "请描述你服务的客户，内部客户直接 {'@'}姓名／工号",
   'form.basic-form.invites.label': '邀评人',
-  'form.basic-form.invites.placeholder': '请直接 {\'@\'}姓名/工号，最多可邀请 5 人',
+  'form.basic-form.invites.placeholder': "请直接 {'@'}姓名/工号，最多可邀请 5 人",
   'form.basic-form.weight.label': '权重',
   'form.basic-form.weight.placeholder': '请输入',
   'form.basic-form.public.label': '目标公开',
@@ -195,4 +194,4 @@ export default {
   'account.settings.message.desc1': '其他用户的消息将以站内信的形式通知',
   'account.settings.message.desc2': '系统消息将以站内信的形式通知',
   'account.settings.message.desc3': '待办任务将以站内信的形式通知',
-}
+};

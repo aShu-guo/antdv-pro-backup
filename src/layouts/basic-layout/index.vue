@@ -1,42 +1,37 @@
 <script setup lang="ts">
-import Header from '../components/header/index.vue'
-import SiderMenu from '../components/sider-menu/index.vue'
-import DrawerMenu from '../components/drawer-menu/index.vue'
-import Menu from '../components/menu/index.vue'
-import SplitMenu from '../components/menu/split-menu.vue'
-import GlobalFooter from '../components/global-footer/index.vue'
-import { proLayoutProps } from './typing'
-import { useLayoutProvider } from './context'
-const props = defineProps(proLayoutProps)
-const emit = defineEmits(['update:collapsed'])
+import Header from '../components/header/index.vue';
+import SiderMenu from '../components/sider-menu/index.vue';
+import DrawerMenu from '../components/drawer-menu/index.vue';
+import Menu from '../components/menu/index.vue';
+import SplitMenu from '../components/menu/split-menu.vue';
+import GlobalFooter from '../components/global-footer/index.vue';
+import { proLayoutProps } from './typing';
+import { useLayoutProvider } from './context';
+const props = defineProps(proLayoutProps);
+const emit = defineEmits(['update:collapsed']);
 
 /**
  * 处理展开收起的事件参数
  * @param collapsed 展开收起的事件参数
  */
 const handleCollapsed = (collapsed: boolean) => {
-  emit('update:collapsed', collapsed)
-  props?.onCollapsed?.(collapsed)
-}
+  emit('update:collapsed', collapsed);
+  props?.onCollapsed?.(collapsed);
+};
 
 // 依赖注入所有的配置项，对属性进行控制，减少传值
 const { hasPageContainer } = useLayoutProvider(props, {
   handleCollapsed,
-})
+});
 
 // 自定义容器的宽高
 const contentCls = computed(() => {
-  const cls: string[] = [
-    'h-full flex flex-col flex-1',
-  ]
-  if (props.contentWidth === 'Fluid' || hasPageContainer.value)
-    cls.push('w-full')
+  const cls: string[] = ['h-full flex flex-col flex-1'];
+  if (props.contentWidth === 'Fluid' || hasPageContainer.value) cls.push('w-full');
+  else if (props.contentWidth === 'Fixed' && !hasPageContainer.value) cls.push(...['max-w-1200px w-1200px', 'mx-auto']);
 
-  else if (props.contentWidth === 'Fixed' && !hasPageContainer.value)
-    cls.push(...['max-w-1200px w-1200px', 'mx-auto'])
-
-  return cls
-})
+  return cls;
+});
 </script>
 
 <template>
@@ -49,7 +44,7 @@ const contentCls = computed(() => {
         <template v-if="header">
           <Header>
             <template v-if="$slots.headerActions" #headerActions>
-              <slot name="headerActions" />
+              <slot name="headerActions"></slot>
             </template>
             <template v-if="$slots.headerContent || layout === 'top' || layout === 'mix'" #headerContent>
               <slot name="headerContent">
@@ -60,13 +55,13 @@ const contentCls = computed(() => {
             </template>
           </Header>
         </template>
-        <slot name="contentPrefix" />
+        <slot name="contentPrefix"></slot>
         <a-layout-content ref="layoutRef" class="ant-pro-basicLayout-content" flex flex-col>
           <div :class="contentCls">
-            <slot />
+            <slot></slot>
           </div>
         </a-layout-content>
-        <a-layout-footer v-if="footer" style="background-color: transparent;">
+        <a-layout-footer v-if="footer" style="background-color: transparent">
           <slot name="footerRender">
             <GlobalFooter :copyright="copyright">
               <template v-if="$slots.renderFooterLinks" #renderFooterLinks>

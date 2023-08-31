@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import type { FormInstance } from 'ant-design-vue'
+import type { FormInstance } from 'ant-design-vue';
 
-const formRef = ref<FormInstance>()
+const formRef = ref<FormInstance>();
 async function handleSubmit() {
   try {
-    const values = await formRef.value?.validateFields()
-    console.log('Success:', values)
-  }
-  catch (errorInfo) {
-    console.log('Failed:', errorInfo)
+    const values = await formRef.value?.validateFields();
+    console.log('Success:', values);
+  } catch (errorInfo) {
+    console.log('Failed:', errorInfo);
   }
 }
 const formState = reactive<Record<string, any>>({
@@ -20,8 +19,8 @@ const formState = reactive<Record<string, any>>({
   invites: '',
   weight: 0,
   target: 1,
-})
-const { t } = useI18n()
+});
+const { t } = useI18n();
 </script>
 
 <template>
@@ -35,10 +34,7 @@ const { t } = useI18n()
           :rules="[{ required: true, message: t('form.basic-form.title.required') }]"
           :wrapper-col="{ lg: { span: 10 }, sm: { span: 17 } }"
         >
-          <a-input
-            v-model:value="formState.name"
-            :placeholder="t('form.basic-form.title.placeholder')"
-          />
+          <a-input v-model:value="formState.name" :placeholder="t('form.basic-form.title.placeholder')" />
         </a-form-item>
         <a-form-item
           :label="t('form.basic-form.date.label')"
@@ -47,10 +43,7 @@ const { t } = useI18n()
           :wrapper-col="{ lg: { span: 10 }, sm: { span: 17 } }"
           name="buildTime"
         >
-          <a-range-picker
-            v-model:value="formState.buildTime"
-            style="width: 100%"
-          />
+          <a-range-picker v-model:value="formState.buildTime" style="width: 100%" />
         </a-form-item>
         <a-form-item
           :label="t('form.basic-form.goal.label')"
@@ -59,11 +52,7 @@ const { t } = useI18n()
           :wrapper-col="{ lg: { span: 10 }, sm: { span: 17 } }"
           name="goal"
         >
-          <a-textarea
-            v-model:value="formState.goal"
-            :rows="4"
-            :placeholder="t('form.basic-form.goal.placeholder')"
-          />
+          <a-textarea v-model:value="formState.goal" :rows="4" :placeholder="t('form.basic-form.goal.placeholder')" />
         </a-form-item>
         <a-form-item
           :label="t('form.basic-form.standard.label')"
@@ -98,7 +87,11 @@ const { t } = useI18n()
           :required="false"
           name="invites"
         >
-          <a-input v-model:value="formState.invites" name="invites" :placeholder="t('form.basic-form.invites.placeholder')" />
+          <a-input
+            v-model:value="formState.invites"
+            name="invites"
+            :placeholder="t('form.basic-form.invites.placeholder')"
+          />
         </a-form-item>
         <a-form-item
           :label="t('form.basic-form.weight.label')"
@@ -143,10 +136,7 @@ const { t } = useI18n()
             </a-select>
           </a-form-item>
         </a-form-item>
-        <a-form-item
-          :wrapper-col="{ span: 24 }"
-          style="text-align: center"
-        >
+        <a-form-item :wrapper-col="{ span: 24 }" style="text-align: center">
           <a-button type="primary" @click="handleSubmit">
             {{ t('form.basic-form.form.submit') }}
           </a-button>

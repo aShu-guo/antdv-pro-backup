@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import type { UnwrapRef } from 'vue'
-import { UploadOutlined } from '@ant-design/icons-vue'
+import type { UnwrapRef } from 'vue';
+import { UploadOutlined } from '@ant-design/icons-vue';
 
 interface FormState {
-  eamil: string
-  name: string
-  phoneNumber: string
-  region: string | undefined
-  address: string
-  desc: string
+  eamil: string;
+  name: string;
+  phoneNumber: string;
+  region: string | undefined;
+  address: string;
+  desc: string;
 }
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const formRef = ref()
-const labelCol = { span: 0 }
-const wrapperCol = { span: 13 }
+const formRef = ref();
+const labelCol = { span: 0 };
+const wrapperCol = { span: 13 };
 const formState: UnwrapRef<FormState> = reactive({
   eamil: 'AntdvPro@abc.com',
   name: 'AntdvPro',
@@ -23,44 +23,32 @@ const formState: UnwrapRef<FormState> = reactive({
   desc: '',
   address: '',
   phoneNumber: '',
-})
+});
 const rules: any = computed(() => {
   return {
-    name: [
-      { required: true, message: t('account.settings.form-rule-name'), trigger: 'change' },
-    ],
+    name: [{ required: true, message: t('account.settings.form-rule-name'), trigger: 'change' }],
 
-    phoneNumber: [
-      { required: true, message: t('account.settings.form-rule-phoneNumber'), trigger: 'change' },
-    ],
-    address: [
-      { required: true, message: t('account.settings.form-rule-address'), trigger: 'change' },
-    ],
-    region: [
-      { required: true, message: t('account.settings.form-rule-region'), trigger: 'change' },
-    ],
-    eamil: [
-      { required: true, message: t('account.settings.form-rule-email'), trigger: 'change' },
-    ],
-    desc: [
-      { required: true, message: t('account.settings.form-rule-desc'), trigger: 'blur' },
-    ],
-  }
-})
+    phoneNumber: [{ required: true, message: t('account.settings.form-rule-phoneNumber'), trigger: 'change' }],
+    address: [{ required: true, message: t('account.settings.form-rule-address'), trigger: 'change' }],
+    region: [{ required: true, message: t('account.settings.form-rule-region'), trigger: 'change' }],
+    eamil: [{ required: true, message: t('account.settings.form-rule-email'), trigger: 'change' }],
+    desc: [{ required: true, message: t('account.settings.form-rule-desc'), trigger: 'blur' }],
+  };
+});
 
 const onSubmit = () => {
   formRef.value
     .validate()
     .then(() => {
-      console.log('values', formState, toRaw(formState))
+      console.log('values', formState, toRaw(formState));
     })
     .catch((error: any) => {
-      console.log('error', error)
-    })
-}
+      console.log('error', error);
+    });
+};
 
 function handleChange() {
-  console.log('change')
+  console.log('change');
 }
 </script>
 
@@ -68,18 +56,20 @@ function handleChange() {
   <a-card :title="t('account.settings.basic-setting')" :bordered="false">
     <a-row>
       <a-col :span="12">
-        <a-form
-          ref="formRef"
-          :model="formState"
-          :rules="rules"
-          :label-col="labelCol"
-          :wrapper-col="wrapperCol"
-        >
+        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
           <a-form-item ref="eamil" :label-col="{ span: 24 }" :label="t('account.settings.form-email')" name="eamil">
-            <a-input v-model:value="formState.eamil" :placeholder="t('account.settings.form-input-plac')" style="width: 320px;" />
+            <a-input
+              v-model:value="formState.eamil"
+              :placeholder="t('account.settings.form-input-plac')"
+              style="width: 320px"
+            />
           </a-form-item>
           <a-form-item ref="name" :label-col="{ span: 24 }" :label="t('account.settings.form-name')" name="name">
-            <a-input v-model:value="formState.name" :placeholder="t('account.settings.form-input-plac')" style="width: 320px;" />
+            <a-input
+              v-model:value="formState.name"
+              :placeholder="t('account.settings.form-input-plac')"
+              style="width: 320px"
+            />
           </a-form-item>
           <a-form-item :label="t('account.settings.form-region')" :label-col="{ span: 24 }" name="region">
             <a-select v-model:value="formState.region" :placeholder="t('account.settings.form-select-plac')">
@@ -88,10 +78,24 @@ function handleChange() {
               </a-select-option>
             </a-select>
           </a-form-item>
-          <a-form-item ref="address" :label-col="{ span: 24 }" :label="t('account.settings.form-address')" name="address">
-            <a-input v-model:value="formState.address" :placeholder="t('account.settings.form-input-plac')" style="width: 320px;" />
+          <a-form-item
+            ref="address"
+            :label-col="{ span: 24 }"
+            :label="t('account.settings.form-address')"
+            name="address"
+          >
+            <a-input
+              v-model:value="formState.address"
+              :placeholder="t('account.settings.form-input-plac')"
+              style="width: 320px"
+            />
           </a-form-item>
-          <a-form-item ref="phoneNumber" :label-col="{ span: 24 }" :label="t('account.settings.form-phoneNumber')" name="phoneNumber">
+          <a-form-item
+            ref="phoneNumber"
+            :label-col="{ span: 24 }"
+            :label="t('account.settings.form-phoneNumber')"
+            name="phoneNumber"
+          >
             <a-input v-model:value="formState.phoneNumber" :placeholder="t('account.settings.form-input-plac')" />
           </a-form-item>
           <a-form-item ref="desc" name="desc" :label="t('account.settings.form-desc')" :label-col="{ span: 24 }">
@@ -111,14 +115,10 @@ function handleChange() {
         <div class="flex flex-col items-center">
           <a-avatar :size="100">
             <template #icon>
-              <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="">
+              <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="" />
             </template>
           </a-avatar>
-          <a-upload
-            name="file"
-            :file-list="[]"
-            @change="handleChange"
-          >
+          <a-upload name="file" :file-list="[]" @change="handleChange">
             <a-button class="mt-4">
               <UploadOutlined />
               {{ t('account.settings.basic-avatar.upload') }}

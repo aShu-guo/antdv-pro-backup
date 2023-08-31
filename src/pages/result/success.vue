@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { DingdingOutlined } from '@ant-design/icons-vue'
-const { t } = useI18n()
-const { isMobile } = useQueryBreakpoints()
+import { DingdingOutlined } from '@ant-design/icons-vue';
+const { t } = useI18n();
+const { isMobile } = useQueryBreakpoints();
 
 const result = computed(() => {
   return {
     title: t('result.success.title'),
     description: t('result.success.description'),
-  }
-})
+  };
+});
 </script>
 
 <template>
@@ -43,13 +43,13 @@ const result = computed(() => {
             2023-08-12 ~ 2024-08-12
           </a-col>
         </a-row>
-        <a-steps :current="1" :direction="isMobile && 'horizontal' || 'horizontal'" progress-dot>
+        <a-steps :current="1" :direction="(isMobile && 'horizontal') || 'horizontal'" progress-dot>
           <a-step :title="t('result.success.step1-title')">
             <span class="text-3">{{ t('result.success.step1-title') }}</span>
             <template #description>
               <div class="relative text-12px align-left left-42px">
                 <div style="margin: 8px 0 4px">
-                  {{ t("result.success.step1-operator") }}
+                  {{ t('result.success.step1-operator') }}
                   <DingdingOutlined class="m-1 c-primary" />
                 </div>
                 <div>2023-08-17 12:32</div>
@@ -61,7 +61,7 @@ const result = computed(() => {
             <template #description>
               <div class="relative text-12px align-left left-42px">
                 <div style="margin: 8px 0 4px">
-                  {{ t("result.success.step2-operator") }}
+                  {{ t('result.success.step2-operator') }}
                   <DingdingOutlined class="m-1 c-primary" />
                 </div>
                 <div>2023-08-17 13:32</div>

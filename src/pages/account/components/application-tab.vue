@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { DownloadOutlined, EditOutlined, EllipsisOutlined, ShareAltOutlined } from '@ant-design/icons-vue'
+import { DownloadOutlined, EditOutlined, EllipsisOutlined, ShareAltOutlined } from '@ant-design/icons-vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 </script>
 
 <template>
@@ -18,17 +18,13 @@ const { t } = useI18n()
                 <p>
                   {{ t('account.center.activity-user') }}
                 </p>
-                <p class="text-20px font-bold text-black">
-                  20k
-                </p>
+                <p class="text-20px font-bold text-black">20k</p>
               </div>
               <div class="ml-20">
                 <p>
                   {{ t('account.center.new-user') }}
                 </p>
-                <p class="text-20px font-bold text-black">
-                  2,000
-                </p>
+                <p class="text-20px font-bold text-black">2,000</p>
               </div>
             </div>
           </template>

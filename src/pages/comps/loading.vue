@@ -1,42 +1,34 @@
 <script setup lang="ts">
-import { useLoading } from '@/composables/base-loading'
+import { useLoading } from '@/composables/base-loading';
 
-const loading = ref(false)
-const full = ref(false)
+const loading = ref(false);
+const full = ref(false);
 
-const time = ref(1000)
+const time = ref(1000);
 
-const loadingList = ref([
-  'pulse',
-  'rect',
-  'plane',
-  'cube',
-  'preloader',
-  'chase',
-  'dot',
-])
+const loadingList = ref(['pulse', 'rect', 'plane', 'cube', 'preloader', 'chase', 'dot']);
 
 const startCustomLoading = (val: number) => {
-  full.value = val === 2
-  loading.value = true
+  full.value = val === 2;
+  loading.value = true;
   setTimeout(() => {
-    loading.value = false
-  }, 2000)
-}
+    loading.value = false;
+  }, 2000);
+};
 
 const startLoading = (item: any) => {
-  const { open, close } = useLoading({ spin: item })
-  open()
+  const { open, close } = useLoading({ spin: item });
+  open();
   setTimeout(() => {
-    close()
-  }, 2000)
-}
+    close();
+  }, 2000);
+};
 
 const startTimeLoading = () => {
-  const { open, close } = useLoading({ minTime: time.value })
-  open()
-  close()
-}
+  const { open, close } = useLoading({ minTime: time.value });
+  open();
+  close();
+};
 </script>
 
 <template>
@@ -50,16 +42,12 @@ const startTimeLoading = () => {
         :loading-full="full"
       >
         <a-space :size="15">
-          <a-button type="primary" @click="startCustomLoading(1)">
-            v-loading指令全屏
-          </a-button>
-          <a-button type="primary" @click="startCustomLoading(2)">
-            v-loading指令非全屏
-          </a-button>
+          <a-button type="primary" @click="startCustomLoading(1)"> v-loading指令全屏 </a-button>
+          <a-button type="primary" @click="startCustomLoading(2)"> v-loading指令非全屏 </a-button>
         </a-space>
       </div>
     </a-card>
-    <a-card title="hook加载loading" hoverable :bordered="false" style="margin-top:15px">
+    <a-card title="hook加载loading" hoverable :bordered="false" style="margin-top: 15px">
       <a-space :size="15">
         <a-button v-for="(item, index) in loadingList" :key="item" type="primary" @click="startLoading(item)">
           loading{{ index + 1 }}
@@ -69,9 +57,7 @@ const startTimeLoading = () => {
     <a-card title="hooloading最小时长" hoverable :bordered="false">
       <a-space :size="15">
         <a-input-number v-model:value="time" />
-        <a-button type="primary" @click="startTimeLoading">
-          点击触发loading
-        </a-button>
+        <a-button type="primary" @click="startTimeLoading"> 点击触发loading </a-button>
       </a-space>
     </a-card>
   </div>

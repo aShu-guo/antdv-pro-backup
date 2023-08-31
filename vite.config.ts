@@ -1,20 +1,23 @@
-import { resolve } from 'path'
-import { fileURLToPath } from 'url'
-import { loadEnv } from 'vite'
-import type { ConfigEnv, UserConfig } from 'vite'
-import { createVitePlugins } from './plugins'
-const baseSrc = fileURLToPath(new URL('./src', import.meta.url))
+import { resolve } from 'path';
+import { fileURLToPath } from 'url';
+import { loadEnv } from 'vite';
+import type { ConfigEnv, UserConfig } from 'vite';
+import { createVitePlugins } from './configs/plugins';
+
+const baseSrc = fileURLToPath(new URL('./src', import.meta.url));
+
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
-  const env = loadEnv(mode, process.cwd())
-  const proxyObj = {}
+  const env = loadEnv(mode, process.cwd());
+  const proxyObj = {};
   if (mode === 'development' && env.VITE_APP_BASE_API_DEV && env.VITE_APP_BASE_URL_DEV) {
     proxyObj[env.VITE_APP_BASE_API_DEV] = {
       target: env.VITE_APP_BASE_URL_DEV,
       changeOrigin: true,
-      rewrite: path => path.replace(new RegExp(`^${env.VITE_APP_BASE_API_DEV}`), ''),
-    }
+      rewrite: (path) => path.replace(new RegExp(`^${env.VITE_APP_BASE_API_DEV}`), ''),
+    };
   }
+
   return {
     plugins: createVitePlugins(env),
     resolve: {
@@ -33,7 +36,8 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         },
         {
           find: 'vue-i18n',
-          replacement: mode === 'development' ? 'vue-i18n/dist/vue-i18n.esm-browser.js' : 'vue-i18n/dist/vue-i18n.esm-bundler.js',
+          replacement:
+            mode === 'development' ? 'vue-i18n/dist/vue-i18n.esm-browser.js' : 'vue-i18n/dist/vue-i18n.esm-bundler.js',
         },
         {
           find: /^ant-design-vue\/es$/,
@@ -92,9 +96,9 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         [env.VITE_APP_BASE_API]: {
           target: env.VITE_APP_BASE_URL,
           changeOrigin: true,
-          rewrite: path => path.replace(new RegExp(`^${env.VITE_APP_BASE_API}`), ''),
+          rewrite: (path) => path.replace(new RegExp(`^${env.VITE_APP_BASE_API}`), ''),
         },
       },
     },
-  }
-}
+  };
+};

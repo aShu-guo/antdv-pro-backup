@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t } = useI18n();
 
 interface PhoneItem {
-  name: string
-  phone: string
-  spentTime: string
-  date: string
+  name: string;
+  phone: string;
+  spentTime: string;
+  date: string;
 }
 
 const phoneDate = ref<PhoneItem[]>([
@@ -33,20 +33,17 @@ const phoneDate = ref<PhoneItem[]>([
     spentTime: '80min',
     date: '2022-6-20 9:50',
   },
-])
+]);
 
 function removeItem(item: PhoneItem) {
-  const index = phoneDate.value.indexOf(item)
-  phoneDate.value.splice(index, 1)
+  const index = phoneDate.value.indexOf(item);
+  phoneDate.value.splice(index, 1);
 }
 </script>
 
 <template>
   <a-card :title="t('profile.advanced.call-log')">
-    <a-list
-      item-layout="horizontal"
-      :data-source="phoneDate"
-    >
+    <a-list item-layout="horizontal" :data-source="phoneDate">
       <template #renderItem="{ item }">
         <a-list-item>
           <template #actions>
@@ -62,9 +59,7 @@ function removeItem(item: PhoneItem) {
               {{ t('profile.advanced.remove') }}
             </a-button>
           </template>
-          <a-list-item-meta
-            :description="item.phone"
-          >
+          <a-list-item-meta :description="item.phone">
             <template #title>
               <a>{{ item.name }}</a>
             </template>
@@ -75,6 +70,4 @@ function removeItem(item: PhoneItem) {
   </a-card>
 </template>
 
-<style scoped lang="less">
-
-</style>
+<style scoped lang="less"></style>

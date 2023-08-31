@@ -1,4 +1,4 @@
-import type { LayoutSetting } from '~@/stores/app'
+import type { LayoutSetting } from '~@/stores/app';
 
 export default {
   title: 'Antdv Pro',
@@ -24,7 +24,7 @@ export default {
   headerHeight: 48,
   copyright: 'Antdv Pro Team 2023',
   animationName: 'slide-fadein-right',
-} as LayoutSetting
+} as LayoutSetting;
 
 export const animationNameList = [
   {
@@ -47,5 +47,5 @@ export const animationNameList = [
     label: 'Fadein',
     value: 'fadein',
   },
-]
-export type AnimationNameValueType = 'none' | 'slide-fadein-up' | 'slide-fadein-right' | 'zoom-fadein' | 'fadein'
+];
+export type AnimationNameValueType = 'none' | 'slide-fadein-up' | 'slide-fadein-right' | 'zoom-fadein' | 'fadein';

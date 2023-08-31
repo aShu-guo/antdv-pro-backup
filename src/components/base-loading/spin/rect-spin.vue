@@ -4,16 +4,16 @@ defineProps({
     type: String,
     default: '#3ff9dc',
   },
-})
+});
 </script>
 
 <template>
   <div class="rect-wrapper">
-    <div class="rect-item rect1" />
-    <div class="rect-item rect2" />
-    <div class="rect-item rect3" />
-    <div class="rect-item rect4" />
-    <div class="rect-item rect5" />
+    <div class="rect-item rect1"></div>
+    <div class="rect-item rect2"></div>
+    <div class="rect-item rect3"></div>
+    <div class="rect-item rect4"></div>
+    <div class="rect-item rect5"></div>
   </div>
 </template>
 

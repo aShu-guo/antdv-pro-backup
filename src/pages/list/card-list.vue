@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const content = '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
+const content =
+  '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。';
 
 const data = ref([
   {
@@ -34,7 +35,7 @@ const data = ref([
     title: 'Angular',
     link: 'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png',
   },
-])
+]);
 </script>
 
 <template>
@@ -42,26 +43,21 @@ const data = ref([
     <div class="mt-2">
       <a-row :gutter="16">
         <a-col :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
-          <a-button class="w-1/1 h-204px" type="dashed">
-            +新增产品
-          </a-button>
+          <a-button class="w-1/1 h-204px" type="dashed"> +新增产品 </a-button>
         </a-col>
         <a-col v-for="(item, index) in data" :key="index" :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
           <a-card
             :bordered="false"
-            style="borderRadius: 0"
-            class="cursor-pointer
-            hover:shadow-[0_4px_20px_-5px_rgba(0,0,0,0.35)]
-            transition
-            duration-300"
+            style="borderradius: 0"
+            class="cursor-pointer hover:shadow-[0_4px_20px_-5px_rgba(0,0,0,0.35)] transition duration-300"
           >
             <template #default>
               <div class="flex h-27">
                 <div class="w-10 h-10 bg-gray-300 rounded-full">
-                  <img class="w-10 h-10 rounded-full" :src="item.link">
+                  <img class="w-10 h-10 rounded-full" :src="item.link" />
                 </div>
                 <div class="ml">
-                  <div style="font-size: 18px; font-weight: 500;">
+                  <div style="font-size: 18px; font-weight: 500">
                     {{ item.title }}
                   </div>
                   <div class="h-17 overflow-hidden overflow">

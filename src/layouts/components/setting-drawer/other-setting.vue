@@ -1,34 +1,33 @@
 <script setup lang="ts">
-import type { CheckedType } from '~@/layouts/basic-layout/typing'
+import type { CheckedType } from '~@/layouts/basic-layout/typing';
 
 defineProps<{
-  colorWeak?: boolean
-  t?: (key: string, ...args: any[]) => string
-}>()
-const emit = defineEmits(['changeSetting'])
-const list = computed(() => ([
+  colorWeak?: boolean;
+  t?: (key: string, ...args: any[]) => string;
+}>();
+const emit = defineEmits(['changeSetting']);
+const list = computed(() => [
   {
     title: '色弱模式',
     key: 'colorWeak',
     disabled: false,
     disabledReason: '',
   },
-]))
+]);
 const handleChangeWeak = (value: CheckedType) => {
-  emit('changeSetting', 'colorWeak', value)
+  emit('changeSetting', 'colorWeak', value);
 
-  const dom = document.querySelector('body')
+  const dom = document.querySelector('body');
   if (dom) {
     if (value) {
-      dom.dataset.prosettingdrawer = dom.style.filter
-      dom.style.filter = 'invert(80%)'
-    }
-    else {
-      dom.style.filter = dom.dataset.prosettingdrawer || 'none'
-      delete dom.dataset.prosettingdrawer
+      dom.dataset.prosettingdrawer = dom.style.filter;
+      dom.style.filter = 'invert(80%)';
+    } else {
+      dom.style.filter = dom.dataset.prosettingdrawer || 'none';
+      delete dom.dataset.prosettingdrawer;
     }
   }
-}
+};
 </script>
 
 <template>
@@ -36,15 +35,10 @@ const handleChangeWeak = (value: CheckedType) => {
     <template #renderItem="{ item }">
       <a-list-item>
         <template #actions>
-          <a-switch
-            size="small"
-            :checked="colorWeak"
-            :disabled="item.disabled"
-            @update:checked="handleChangeWeak"
-          />
+          <a-switch size="small" :checked="colorWeak" :disabled="item.disabled" @update:checked="handleChangeWeak" />
         </template>
         <span :style="{ opacity: item.disabled ? '0.5' : '1' }">
-          {{ t?.("app.setting.weakmode", item.title) ?? item.title }}
+          {{ t?.('app.setting.weakmode', item.title) ?? item.title }}
         </span>
       </a-list-item>
     </template>

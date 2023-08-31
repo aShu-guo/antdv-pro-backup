@@ -55,8 +55,7 @@ export default {
   'app.setting.weakmode': '色弱模式',
   'app.setting.copy': '拷贝设置',
   'app.setting.copyinfo': '拷贝成功，请到 config/default-settings.js 中替换默认配置',
-  'app.setting.production.hint':
-    '配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件',
+  'app.setting.production.hint': '配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件',
   'app.multiTab.title': '多页签',
   'app.multiTab.closeCurrent': '关闭当前',
   'app.multiTab.closeOther': '关闭其他',
@@ -126,4 +125,4 @@ export default {
   'menu.account.settings': '个人设置',
   'menu.account.trigger': '触发报错',
   'menu.account.logout': '退出登录',
-}
+};

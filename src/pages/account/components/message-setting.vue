@@ -1,11 +1,11 @@
 <script setup lang="ts">
 interface DataItem {
-  title: string
-  desc: string
-  checked: boolean
+  title: string;
+  desc: string;
+  checked: boolean;
 }
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const data = reactive<DataItem[]>([
   {
@@ -23,7 +23,7 @@ const data = reactive<DataItem[]>([
     desc: t('account.settings.message.desc3'),
     checked: true,
   },
-])
+]);
 </script>
 
 <template>
@@ -31,9 +31,7 @@ const data = reactive<DataItem[]>([
     <a-list item-layout="horizontal" :data-source="data">
       <template #renderItem="{ item }">
         <a-list-item>
-          <a-list-item-meta
-            :description="item.desc"
-          >
+          <a-list-item-meta :description="item.desc">
             <template #title>
               <a href="https://www.antdv.com/">{{ item.title }}</a>
             </template>

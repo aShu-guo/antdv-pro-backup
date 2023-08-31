@@ -1,8 +1,8 @@
-import type { RouteRecordRaw } from 'vue-router'
-import { basicRouteMap } from './router-modules'
-import { AccessEnum } from '~@/utils/constant'
-export const ROOT_ROUTE_REDIRECT_PATH = '/dashboard'
-const Layout = () => import('~/layouts/index.vue')
+import type { RouteRecordRaw } from 'vue-router';
+import { basicRouteMap } from './router-modules';
+import { AccessEnum } from '~@/utils/constant';
+export const ROOT_ROUTE_REDIRECT_PATH = '/dashboard';
+const Layout = () => import('~/layouts/index.vue');
 
 export const rootRoute: RouteRecordRaw = {
   path: '/',
@@ -10,7 +10,7 @@ export const rootRoute: RouteRecordRaw = {
   redirect: ROOT_ROUTE_REDIRECT_PATH,
   component: Layout,
   children: [],
-}
+};
 
 export default [
   {
@@ -90,7 +90,8 @@ export default [
           title: 'AntDesign',
           url: 'https://ant.design/',
         },
-      }, {
+      },
+      {
         path: '/link/antdv',
         name: 'LinkAntdv',
         component: basicRouteMap.Iframe,
@@ -394,4 +395,4 @@ export default [
       },
     ],
   },
-] as RouteRecordRaw[]
+] as RouteRecordRaw[];

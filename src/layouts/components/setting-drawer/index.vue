@@ -1,78 +1,81 @@
 <script setup lang="ts">
-import { CloseOutlined, CopyOutlined, NotificationOutlined, SettingOutlined } from '@ant-design/icons-vue'
-import { useClipboard } from '@v-c/utils'
-import type { ContentWidth, LayoutType, ThemeType } from '../../basic-layout/typing'
-import Body from './body.vue'
-import BlockCheckbox from './block-checkbox.vue'
-import ThemeColor from './theme-color.vue'
-import LayoutSetting from './layout-setting.vue'
-import RegionalSetting from './regional-setting.vue'
-import OtherSetting from './other-setting.vue'
-const props = withDefaults(defineProps<{
-  open?: boolean
-  theme?: ThemeType
-  colorPrimary?: string
-  colorList?: ({ key: string; color: string })[]
-  layout?: LayoutType
-  contentWidth?: ContentWidth
-  fixedHeader?: boolean
-  fixedSider?: boolean
-  splitMenus?: boolean
-  keepAlive?: boolean
-  accordionMode?: boolean
-  header?: boolean
-  footer?: boolean
-  menu?: boolean
-  menuHeader?: boolean
-  colorWeak?: boolean
-  multiTab?: boolean
-  multiTabFixed?: boolean
-  animationName?: string
-  animationNameList?: any[]
-  layoutSetting?: Record<string, any>
-  t?: (key: string, ...args: any[]) => string
-}>(), {
-  theme: 'light',
-  colorList: () => [
-    { key: 'techBlue', color: '#1677FF' },
-    { key: 'daybreak', color: '#1890ff' },
-    { key: 'dust', color: '#F5222D' },
-    { key: 'volcano', color: '#FA541C' },
-    { key: 'sunset', color: '#FAAD14' },
-    { key: 'cyan', color: '#13C2C2' },
-    { key: 'green', color: '#52C41A' },
-    { key: 'geekblue', color: '#2F54EB' },
-    { key: 'purple', color: '#722ED1' },
-  ],
-})
-const emit = defineEmits(['update:open', 'settingChange'])
-const { copy } = useClipboard()
-const prefixCls = shallowRef('ant-pro-drawer-setting')
-const { message } = useGlobalConfig()
+import { CloseOutlined, CopyOutlined, NotificationOutlined, SettingOutlined } from '@ant-design/icons-vue';
+import { useClipboard } from '@v-c/utils';
+import type { ContentWidth, LayoutType, ThemeType } from '../../basic-layout/typing';
+import Body from './body.vue';
+import BlockCheckbox from './block-checkbox.vue';
+import ThemeColor from './theme-color.vue';
+import LayoutSetting from './layout-setting.vue';
+import RegionalSetting from './regional-setting.vue';
+import OtherSetting from './other-setting.vue';
+const props = withDefaults(
+  defineProps<{
+    open?: boolean;
+    theme?: ThemeType;
+    colorPrimary?: string;
+    colorList?: { key: string; color: string }[];
+    layout?: LayoutType;
+    contentWidth?: ContentWidth;
+    fixedHeader?: boolean;
+    fixedSider?: boolean;
+    splitMenus?: boolean;
+    keepAlive?: boolean;
+    accordionMode?: boolean;
+    header?: boolean;
+    footer?: boolean;
+    menu?: boolean;
+    menuHeader?: boolean;
+    colorWeak?: boolean;
+    multiTab?: boolean;
+    multiTabFixed?: boolean;
+    animationName?: string;
+    animationNameList?: any[];
+    layoutSetting?: Record<string, any>;
+    t?: (key: string, ...args: any[]) => string;
+  }>(),
+  {
+    theme: 'light',
+    colorList: () => [
+      { key: 'techBlue', color: '#1677FF' },
+      { key: 'daybreak', color: '#1890ff' },
+      { key: 'dust', color: '#F5222D' },
+      { key: 'volcano', color: '#FA541C' },
+      { key: 'sunset', color: '#FAAD14' },
+      { key: 'cyan', color: '#13C2C2' },
+      { key: 'green', color: '#52C41A' },
+      { key: 'geekblue', color: '#2F54EB' },
+      { key: 'purple', color: '#722ED1' },
+    ],
+  },
+);
+const emit = defineEmits(['update:open', 'settingChange']);
+const { copy } = useClipboard();
+const prefixCls = shallowRef('ant-pro-drawer-setting');
+const { message } = useGlobalConfig();
 const copySetting = () => {
-  copy(JSON.stringify(props.layoutSetting ?? {}))
-  message?.success(props?.t?.('app.setting.copyinfo', '拷贝成功，请到 config/default-settings.js 中替换默认配置'))
-}
+  copy(JSON.stringify(props.layoutSetting ?? {}));
+  message?.success(props?.t?.('app.setting.copyinfo', '拷贝成功，请到 config/default-settings.js 中替换默认配置'));
+};
 const handleVisible = (open: boolean) => {
-  emit('update:open', open)
-}
+  emit('update:open', open);
+};
 
 const changeTheme = (theme: ThemeType) => {
-  emit('settingChange', 'theme', theme)
-}
+  emit('settingChange', 'theme', theme);
+};
 
 const changeColor = (color: string) => {
-  emit('settingChange', 'colorPrimary', color)
-}
+  emit('settingChange', 'colorPrimary', color);
+};
 
 const changeLayout = (layout: string) => {
-  emit('settingChange', 'layout', layout)
-}
+  emit('settingChange', 'layout', layout);
+};
 const changeSettingLayout = (key: string, value: any) => {
-  emit('settingChange', key, value)
-}
+  emit('settingChange', key, value);
+};
 
-const { token } = useAntdToken()
+const { token } = useAntdToken();
 </script>
 
 <template>
@@ -82,18 +85,21 @@ const { token } = useAntdToken()
       backgroundColor: token?.colorPrimary,
       borderEndStartRadius: `${token?.borderRadius}px`,
       borderStartStartRadius: `${token?.borderRadius}px`,
-    }" @click="handleVisible(!open)"
+    }"
+    @click="handleVisible(!open)"
   >
-    <CloseOutlined v-if="open" :class="`${prefixCls}-handle-icon${theme === 'light' ? '' : '-dark'}`" style="font-size: 20px;" />
-    <SettingOutlined v-else :class="`${prefixCls}-handle-icon${theme === 'light' ? '' : '-dark'}`" style="font-size: 20px;" />
+    <CloseOutlined
+      v-if="open"
+      :class="`${prefixCls}-handle-icon${theme === 'light' ? '' : '-dark'}`"
+      style="font-size: 20px"
+    />
+    <SettingOutlined
+      v-else
+      :class="`${prefixCls}-handle-icon${theme === 'light' ? '' : '-dark'}`"
+      style="font-size: 20px"
+    />
   </div>
-  <a-drawer
-    :open="open"
-    :width="300"
-    placement="right"
-    :closable="false"
-    @update:open="handleVisible"
-  >
+  <a-drawer :open="open" :width="300" placement="right" :closable="false" @update:open="handleVisible">
     <template #handle>
       <div
         :class="`${prefixCls}-handle`"
@@ -107,16 +113,43 @@ const { token } = useAntdToken()
         }"
         @click="handleVisible(!open)"
       >
-        <CloseOutlined v-if="open" :class="`${prefixCls}-handle-icon${props.theme === 'light' ? '' : '-dark'}`" style="font-size: 20px;" />
-        <SettingOutlined v-else :class="`${prefixCls}-handle-icon${props.theme === 'light' ? '' : '-dark'}`" style="font-size: 20px;" />
+        <CloseOutlined
+          v-if="open"
+          :class="`${prefixCls}-handle-icon${props.theme === 'light' ? '' : '-dark'}`"
+          style="font-size: 20px"
+        />
+        <SettingOutlined
+          v-else
+          :class="`${prefixCls}-handle-icon${props.theme === 'light' ? '' : '-dark'}`"
+          style="font-size: 20px"
+        />
       </div>
     </template>
     <div :class="`${prefixCls}-content`">
       <Body :title="t?.('app.setting.pagestyle') ?? '整体风格设计'">
         <div :class="`${prefixCls}-block-checkbox`">
-          <BlockCheckbox :t="t" :checked="props.theme === 'light'" theme="light" :is-dark="props.theme === 'dark'" @click="changeTheme('light')" />
-          <BlockCheckbox v-if="layout !== 'mix'" :t="t" :checked="props.theme === 'inverted'" theme="inverted" :is-dark="props.theme === 'dark'" @click="changeTheme('inverted')" />
-          <BlockCheckbox :t="t" :checked="props.theme === 'dark'" theme="dark" :is-dark="props.theme === 'dark'" @click="changeTheme('dark')" />
+          <BlockCheckbox
+            :t="t"
+            :checked="props.theme === 'light'"
+            theme="light"
+            :is-dark="props.theme === 'dark'"
+            @click="changeTheme('light')"
+          />
+          <BlockCheckbox
+            v-if="layout !== 'mix'"
+            :t="t"
+            :checked="props.theme === 'inverted'"
+            theme="inverted"
+            :is-dark="props.theme === 'dark'"
+            @click="changeTheme('inverted')"
+          />
+          <BlockCheckbox
+            :t="t"
+            :checked="props.theme === 'dark'"
+            theme="dark"
+            :is-dark="props.theme === 'dark'"
+            @click="changeTheme('dark')"
+          />
         </div>
       </Body>
       <Body :title="t?.('app.setting.themecolor') ?? '主题色'">
@@ -125,9 +158,27 @@ const { token } = useAntdToken()
       <a-divider />
       <Body :title="t?.('app.setting.pagestyle.mode') ?? '导航模式'">
         <div :class="`${prefixCls}-block-checkbox`">
-          <BlockCheckbox :t="t" theme="side" :checked="layout === 'side'" :is-dark="props.theme === 'dark'" @click="changeLayout('side')" />
-          <BlockCheckbox :t="t" theme="top" :checked="layout === 'top'" :is-dark="props.theme === 'dark'" @click="changeLayout('top')" />
-          <BlockCheckbox :t="t" theme="mix" :checked="layout === 'mix'" :is-dark="props.theme === 'dark'" @click="changeLayout('mix')" />
+          <BlockCheckbox
+            :t="t"
+            theme="side"
+            :checked="layout === 'side'"
+            :is-dark="props.theme === 'dark'"
+            @click="changeLayout('side')"
+          />
+          <BlockCheckbox
+            :t="t"
+            theme="top"
+            :checked="layout === 'top'"
+            :is-dark="props.theme === 'dark'"
+            @click="changeLayout('top')"
+          />
+          <BlockCheckbox
+            :t="t"
+            theme="mix"
+            :checked="layout === 'mix'"
+            :is-dark="props.theme === 'dark'"
+            @click="changeLayout('mix')"
+          />
         </div>
       </Body>
       <LayoutSetting
@@ -159,11 +210,7 @@ const { token } = useAntdToken()
       </Body>
       <a-divider />
       <Body :title="t?.('app.setting.othersettings') ?? '其他设置'">
-        <OtherSetting
-          :t="t"
-          :color-weak="colorWeak"
-          @change-setting="changeSettingLayout"
-        />
+        <OtherSetting :t="t" :color-weak="colorWeak" @change-setting="changeSettingLayout" />
       </Body>
       <a-divider />
       <Body>
@@ -171,15 +218,16 @@ const { token } = useAntdToken()
           <a-alert
             type="warning"
             show-icon
-            :message="t?.('app.setting.production.hint') ?? '配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件' "
+            :message="
+              t?.('app.setting.production.hint') ??
+              '配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件'
+            "
           >
             <template #icon>
               <NotificationOutlined />
             </template>
           </a-alert>
-          <a-button @click="copySetting">
-            <CopyOutlined /> {{ t?.('app.setting.copy', '拷贝设置') }}
-          </a-button>
+          <a-button @click="copySetting"> <CopyOutlined /> {{ t?.('app.setting.copy', '拷贝设置') }} </a-button>
         </div>
       </Body>
     </div>
@@ -187,5 +235,5 @@ const { token } = useAntdToken()
 </template>
 
 <style lang="less">
-@import "./index.less";
+@import './index.less';
 </style>

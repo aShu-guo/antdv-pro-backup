@@ -1,15 +1,13 @@
 <script setup lang="ts">
-const command = ref('a')
-const activeKey = ref()
-const { t } = useI18n()
+const command = ref('a');
+const activeKey = ref();
+const { t } = useI18n();
 </script>
 
 <template>
   <a-row>
     <a-col :span="19">
-      <span class="text-20px font-medium">
-        {{ t('profile.basic.orderNumber') }}: 335231129436
-      </span>
+      <span class="text-20px font-medium"> {{ t('profile.basic.orderNumber') }}: 335231129436 </span>
     </a-col>
     <a-col :span="5">
       <a-radio-group v-model:value="command" button-style="solid">
@@ -29,28 +27,16 @@ const { t } = useI18n()
     <a-row>
       <a-col :span="8">
         <div>
-          <p>
-            {{ t('profile.advanced.creater') }}: windlil
-          </p>
-          <p>
-            {{ t('profile.advanced.create-time') }}: 2020-12-12
-          </p>
-          <p>
-            {{ t('profile.advanced.create-effective-date') }}: 2021-01-01
-          </p>
+          <p>{{ t('profile.advanced.creater') }}: windlil</p>
+          <p>{{ t('profile.advanced.create-time') }}: 2020-12-12</p>
+          <p>{{ t('profile.advanced.create-effective-date') }}: 2021-01-01</p>
         </div>
       </a-col>
       <a-col :span="8">
         <div>
-          <p>
-            {{ t('profile.advanced.create-product') }}: XX服务
-          </p>
-          <p>
-            {{ t('profile.advanced.create-id') }}: 12345
-          </p>
-          <p>
-            {{ t('profile.advanced.create-info') }}: 请于两个工作日内确认
-          </p>
+          <p>{{ t('profile.advanced.create-product') }}: XX服务</p>
+          <p>{{ t('profile.advanced.create-id') }}: 12345</p>
+          <p>{{ t('profile.advanced.create-info') }}: 请于两个工作日内确认</p>
         </div>
       </a-col>
       <a-col :span="8" class="pl-45">
@@ -67,9 +53,7 @@ const { t } = useI18n()
             <p class="text-gray-400">
               {{ t('profile.advanced.create-price') }}
             </p>
-            <p class="text-24px">
-              ￥666.66
-            </p>
+            <p class="text-24px">￥666.66</p>
           </div>
         </div>
       </a-col>

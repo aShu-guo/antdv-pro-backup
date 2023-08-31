@@ -1,79 +1,65 @@
 <script lang="ts" setup>
-import type { CSSProperties } from 'vue'
-import {
-  CloseOutlined,
-  MoreOutlined,
-  ReloadOutlined,
-} from '@ant-design/icons-vue'
-import type { RouteLocationNormalized } from 'vue-router'
-import { listenerRouteChange, removeRouteListener } from '~@/utils/route-listener'
-const multiTabStore = useMultiTab()
-const { list, activeKey } = storeToRefs(multiTabStore)
-const { layoutSetting } = storeToRefs(useAppStore())
+import type { CSSProperties } from 'vue';
+import { CloseOutlined, MoreOutlined, ReloadOutlined } from '@ant-design/icons-vue';
+import type { RouteLocationNormalized } from 'vue-router';
+import { listenerRouteChange, removeRouteListener } from '~@/utils/route-listener';
+const multiTabStore = useMultiTab();
+const { list, activeKey } = storeToRefs(multiTabStore);
+const { layoutSetting } = storeToRefs(useAppStore());
 const tabStyle = computed<CSSProperties>(() => {
-  const style: CSSProperties = {}
+  const style: CSSProperties = {};
   if (layoutSetting.value.multiTabFixed) {
-    style.position = 'fixed'
-    style.top = `${layoutSetting.value.headerHeight}px`
-    style.zIndex = 1
+    style.position = 'fixed';
+    style.top = `${layoutSetting.value.headerHeight}px`;
+    style.zIndex = 1;
   }
 
-  return style
-})
-const tabsRef = shallowRef()
-const { height } = useElementSize(tabsRef)
+  return style;
+});
+const tabsRef = shallowRef();
+const { height } = useElementSize(tabsRef);
 
 const handleSwitch = ({ key }: any, current: string) => {
-  if (key === 'closeCurrent') multiTabStore.close(activeKey.value)
-  else if (key === 'closeLeft') multiTabStore.closeLeft(current)
-  else if (key === 'closeRight') multiTabStore.closeRight(current)
-  else if (key === 'closeOther') multiTabStore.closeOther(current)
-  else if (key === 'refresh') multiTabStore.refresh(activeKey.value)
-}
+  if (key === 'closeCurrent') multiTabStore.close(activeKey.value);
+  else if (key === 'closeLeft') multiTabStore.closeLeft(current);
+  else if (key === 'closeRight') multiTabStore.closeRight(current);
+  else if (key === 'closeOther') multiTabStore.closeOther(current);
+  else if (key === 'refresh') multiTabStore.refresh(activeKey.value);
+};
 
 const isCurrentDisabled = computed(() => {
-  return (
-    list.value.length === 1 || list.value.filter(v => !v.affix).length <= 1
-  )
-})
+  return list.value.length === 1 || list.value.filter((v) => !v.affix).length <= 1;
+});
 
 const leftDisabled = (key: string) => {
   // 判断左侧是否还有可关闭的
-  const index = list.value.findIndex(v => v.fullPath === key)
-  return index === 0 || list.value.filter(v => !v.affix).length <= 1
-}
+  const index = list.value.findIndex((v) => v.fullPath === key);
+  return index === 0 || list.value.filter((v) => !v.affix).length <= 1;
+};
 
 const rightDisabled = (key: string) => {
   // 判断右侧是否还有可关闭的
-  const index = list.value.findIndex(v => v.fullPath === key)
-  return (
-    index === list.value.length - 1
-    || list.value.filter(v => !v.affix).length <= 1
-  )
-}
+  const index = list.value.findIndex((v) => v.fullPath === key);
+  return index === list.value.length - 1 || list.value.filter((v) => !v.affix).length <= 1;
+};
 const otherDisabled = computed(() => {
-  return (
-    list.value.length === 1 || list.value.filter(v => !v.affix).length <= 1
-  )
-})
+  return list.value.length === 1 || list.value.filter((v) => !v.affix).length <= 1;
+});
 listenerRouteChange((route: RouteLocationNormalized) => {
-  if (route.fullPath.startsWith('/redirect')) return
-  const item = list.value.find(item => item.fullPath === route.fullPath)
+  if (route.fullPath.startsWith('/redirect')) return;
+  const item = list.value.find((item) => item.fullPath === route.fullPath);
 
-  if (route.fullPath === activeKey.value && !item?.loading) return
-  activeKey.value = route.fullPath
-  multiTabStore.addItem(route)
-}, true)
+  if (route.fullPath === activeKey.value && !item?.loading) return;
+  activeKey.value = route.fullPath;
+  multiTabStore.addItem(route);
+}, true);
 onUnmounted(() => {
-  removeRouteListener()
-})
+  removeRouteListener();
+});
 </script>
 
 <template>
-  <div
-    v-if="layoutSetting.multiTabFixed"
-    :style="{ height: `${height + 10}px` }"
-  />
+  <div v-if="layoutSetting.multiTabFixed" :style="{ height: `${height + 10}px` }"></div>
   <a-tabs
     ref="tabsRef"
     :active-key="activeKey"
@@ -109,37 +95,25 @@ onUnmounted(() => {
           </div>
           <template #overlay>
             <a-menu @click="handleSwitch($event, item.fullPath)">
-              <a-menu-item
-                key="closeCurrent"
-                :disabled="isCurrentDisabled || activeKey !== item.fullPath"
-              >
+              <a-menu-item key="closeCurrent" :disabled="isCurrentDisabled || activeKey !== item.fullPath">
                 <!-- 关闭当前 -->
-                {{ $t("app.multiTab.closeCurrent") }}
+                {{ $t('app.multiTab.closeCurrent') }}
               </a-menu-item>
-              <a-menu-item
-                key="closeLeft"
-                :disabled="isCurrentDisabled || leftDisabled(item.fullPath)"
-              >
+              <a-menu-item key="closeLeft" :disabled="isCurrentDisabled || leftDisabled(item.fullPath)">
                 <!-- 关闭左侧 -->
-                {{ $t("app.multiTab.closeLeft") }}
+                {{ $t('app.multiTab.closeLeft') }}
               </a-menu-item>
-              <a-menu-item
-                key="closeRight"
-                :disabled="isCurrentDisabled || rightDisabled(item.fullPath)"
-              >
+              <a-menu-item key="closeRight" :disabled="isCurrentDisabled || rightDisabled(item.fullPath)">
                 <!-- 关闭右侧 -->
-                {{ $t("app.multiTab.closeRight") }}
+                {{ $t('app.multiTab.closeRight') }}
               </a-menu-item>
-              <a-menu-item
-                key="closeOther"
-                :disabled="isCurrentDisabled || otherDisabled"
-              >
+              <a-menu-item key="closeOther" :disabled="isCurrentDisabled || otherDisabled">
                 <!-- 关闭其他 -->
-                {{ $t("app.multiTab.closeOther") }}
+                {{ $t('app.multiTab.closeOther') }}
               </a-menu-item>
               <a-menu-item key="refresh" :disabled="!isCurrentDisabled">
                 <!-- 刷新当前 -->
-                {{ $t("app.multiTab.refresh") }}
+                {{ $t('app.multiTab.refresh') }}
               </a-menu-item>
             </a-menu>
           </template>
@@ -147,7 +121,7 @@ onUnmounted(() => {
       </template>
     </a-tab-pane>
     <template #leftExtra>
-      <div class="w-24px" />
+      <div class="w-24px"></div>
     </template>
     <template #rightExtra>
       <div class="w-48px flex item-center justify-center">
@@ -155,16 +129,13 @@ onUnmounted(() => {
           <MoreOutlined class="text-16px" />
           <template #overlay>
             <a-menu @click="handleSwitch($event, activeKey)">
-              <a-menu-item
-                key="closeOther"
-                :disabled="isCurrentDisabled || otherDisabled"
-              >
+              <a-menu-item key="closeOther" :disabled="isCurrentDisabled || otherDisabled">
                 <!-- 关闭其他 -->
-                {{ $t("app.multiTab.closeOther") }}
+                {{ $t('app.multiTab.closeOther') }}
               </a-menu-item>
               <a-menu-item key="refresh">
                 <!-- 刷新当前 -->
-                {{ $t("app.multiTab.refresh") }}
+                {{ $t('app.multiTab.refresh') }}
               </a-menu-item>
             </a-menu>
           </template>
