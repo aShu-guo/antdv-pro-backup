@@ -16,6 +16,8 @@ export interface RequestConfigExtra {
   customDev?: boolean;
   loading?: boolean;
 }
+
+console.log('>>>>>>import.meta.env:', import.meta.env);
 const instance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API ?? '/',
   timeout: 60000,

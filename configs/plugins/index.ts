@@ -6,6 +6,9 @@ import Components from 'unplugin-vue-components/vite';
 import Unocss from 'unocss/vite';
 import AntdvResolver from 'antdv-component-resolver';
 import { viteBuildInfo } from './vite-build-info';
+import { ConfigVisualizerConfig } from './visualizer';
+import { ConfigImageminPlugin } from './imagemin';
+import { ConfigCompressPlugin } from './compress';
 
 export function createVitePlugins(env: Record<string, string>) {
   const vitePluginList: (PluginOption | PluginOption[])[] = [
@@ -22,6 +25,9 @@ export function createVitePlugins(env: Record<string, string>) {
       dirs: ['src/components'],
     }),
     Unocss(),
+    ConfigImageminPlugin(),
+    ConfigCompressPlugin(),
+    ConfigVisualizerConfig(),
     viteBuildInfo(env.VITE_APP_NAME),
   ];
   return vitePluginList;
