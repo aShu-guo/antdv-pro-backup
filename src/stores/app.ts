@@ -30,6 +30,83 @@ export interface LayoutSetting {
   animationName?: AnimationNameValueType;
 }
 
+export const useAppStore = defineStore('app', {
+  state: (): { layoutSetting: LayoutSetting } & { themeConfig: ThemeConfig } => ({
+    layoutSetting: defaultSetting,
+    themeConfig: {
+      algorithm: antdTheme.defaultAlgorithm,
+      token: {
+        colorBgContainer: '#fff',
+        colorPrimary: defaultSetting.colorPrimary,
+      },
+      components: {},
+    },
+  }),
+  actions: {
+    toggleTheme(theme: ThemeType) {
+      if (this.layoutSetting.theme === theme) return;
+
+      this.layoutSetting.theme = theme;
+
+      switch (this.layoutSetting.theme) {
+        case 'light':
+        case 'inverted':
+          toggleDark(false);
+
+          if (this.themeConfig.token) this.themeConfig.token.colorBgContainer = '#fff';
+          if (this.themeConfig.components?.Menu) delete this.themeConfig.components.Menu;
+          this.themeConfig.algorithm = antdTheme.defaultAlgorithm;
+          break;
+        case 'dark':
+          toggleDark(true);
+          if (this.themeConfig.token) this.themeConfig.token.colorBgContainer = 'rgb(36, 37, 37)';
+          if (this.themeConfig.components) {
+            this.$patch({
+              themeConfig: {
+                algorithm: antdTheme.darkAlgorithm,
+                components: {
+                  ...this.themeConfig.components,
+                  Menu: {
+                    colorItemBg: 'rgb(36, 37, 37)',
+                    colorSubItemBg: 'rgb(36, 37, 37)',
+                    menuSubMenuBg: 'rgb(36, 37, 37)',
+                  } as any,
+                },
+              },
+            });
+          }
+          break;
+      }
+    },
+    toggleDrawerVisible(visible: boolean) {
+      this.layoutSetting.drawerVisible = visible;
+    },
+    toggleColorPrimary(color: string) {
+      this.layoutSetting.colorPrimary = color;
+      if (this.themeConfig.token) this.themeConfig.token.colorPrimary = color;
+    },
+    toggleCollapsed(collapsed: boolean) {
+      this.layoutSetting.collapsed = collapsed;
+    },
+    toggleLayout(layout: LayoutType) {
+      if (this.layoutSetting.theme === 'inverted' && layout === 'mix') this.layoutSetting.theme = 'light';
+
+      if (layout !== 'mix') this.layoutSetting.splitMenus = false;
+
+      if (layout === 'top') this.layoutSetting.contentWidth = 'Fixed';
+      else this.layoutSetting.contentWidth = 'Fluid';
+
+      this.layoutSetting.layout = layout;
+    },
+    changeSettingLayout(key: keyof LayoutSetting, value: any) {
+      if (key === 'theme') this.toggleTheme(value as ThemeType);
+      else if (key === 'colorPrimary') this.toggleColorPrimary(value);
+      else if (key === 'layout') this.toggleLayout(value as LayoutType);
+      else if (key in this) this.$patch({ [key]: value });
+    },
+  },
+});
+/*
 export const useAppStore = defineStore('app', () => {
   const layoutSetting = reactive<LayoutSetting>(defaultSetting);
   const themeConfig = reactive<ThemeConfig>({
@@ -78,7 +155,7 @@ export const useAppStore = defineStore('app', () => {
   };
 
   // 如果加载进来是暗色模式，就切换到暗色模式
-  if (isDark.value) toggleTheme('dark');
+  if (.value) toggleTheme('dark');
 
   // 监听isDark的变化
   watch(isDark, () => {
@@ -117,4 +194,4 @@ export const useAppStore = defineStore('app', () => {
     changeSettingLayout,
     toggleColorPrimary,
   };
-});
+});*/
