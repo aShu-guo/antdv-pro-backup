@@ -1,12 +1,12 @@
 import { AxiosError } from 'axios';
 import router from '~/router';
 import { useMetaTitle } from '~/composables/meta-title';
-import { setRouteEmitter } from '~@/utils/route-listener';
-const allowList = ['/login', '/error', '/401', '/404', '/403'];
+import { routeChangeProducer } from '~@/utils/route-listener';
 const loginPath = '/login';
+import { allowList } from '~#/route-allowlist.ts';
 
 router.beforeEach(async (to, _, next) => {
-  setRouteEmitter(to);
+  routeChangeProducer(to);
   // 获取
   const userStore = useUserStore();
   const token = useAuthorization();

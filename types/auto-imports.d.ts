@@ -225,6 +225,7 @@ declare global {
   const useMouseInElement: (typeof import('@vueuse/core'))['useMouseInElement'];
   const useMousePressed: (typeof import('@vueuse/core'))['useMousePressed'];
   const useMultiTab: (typeof import('../src/stores/multi-tab'))['useMultiTab'];
+  const useMultiTab2: (typeof import('../src/stores/multi-tab'))['useMultiTab2'];
   const useMutationObserver: (typeof import('@vueuse/core'))['useMutationObserver'];
   const useNavigatorLanguage: (typeof import('@vueuse/core'))['useNavigatorLanguage'];
   const useNetwork: (typeof import('@vueuse/core'))['useNetwork'];
@@ -305,6 +306,7 @@ declare global {
   const useWindowFocus: (typeof import('@vueuse/core'))['useWindowFocus'];
   const useWindowScroll: (typeof import('@vueuse/core'))['useWindowScroll'];
   const useWindowSize: (typeof import('@vueuse/core'))['useWindowSize'];
+  const useuseMultiTab: (typeof import('../src/stores/multi-tab'))['useuseMultiTab'];
   const watch: (typeof import('vue'))['watch'];
   const watchArray: (typeof import('@vueuse/core'))['watchArray'];
   const watchAtMost: (typeof import('@vueuse/core'))['watchAtMost'];

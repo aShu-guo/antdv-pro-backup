@@ -1,4 +1,4 @@
-import type { VNode } from 'vue';
+import { VNode } from 'vue';
 import { KeepAlive, cloneVNode, createVNode, defineComponent } from 'vue';
 interface CompConsumerProps {
   component?: VNode;

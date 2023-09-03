@@ -2,9 +2,9 @@
 import type { CSSProperties } from 'vue';
 import { CloseOutlined, MoreOutlined, ReloadOutlined } from '@ant-design/icons-vue';
 import type { RouteLocationNormalized } from 'vue-router';
-import { listenerRouteChange, removeRouteListener } from '~@/utils/route-listener';
+import { routeChangeConsumer, removeRouteListener } from '~@/utils/route-listener';
 const multiTabStore = useMultiTab();
-const { list, activeKey } = storeToRefs(multiTabStore);
+const { list, activeFullPath } = storeToRefs(multiTabStore);
 const { layoutSetting } = storeToRefs(useAppStore());
 const tabStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {};
@@ -20,11 +20,11 @@ const tabsRef = shallowRef();
 const { height } = useElementSize(tabsRef);
 
 const handleSwitch = ({ key }: any, current: string) => {
-  if (key === 'closeCurrent') multiTabStore.close(activeKey.value);
+  if (key === 'closeCurrent') multiTabStore.close(activeFullPath.value);
   else if (key === 'closeLeft') multiTabStore.closeLeft(current);
   else if (key === 'closeRight') multiTabStore.closeRight(current);
   else if (key === 'closeOther') multiTabStore.closeOther(current);
-  else if (key === 'refresh') multiTabStore.refresh(activeKey.value);
+  else if (key === 'refresh') multiTabStore.refresh(activeFullPath.value);
 };
 
 const isCurrentDisabled = computed(() => {
@@ -45,14 +45,15 @@ const rightDisabled = (key: string) => {
 const otherDisabled = computed(() => {
   return list.value.length === 1 || list.value.filter((v) => !v.affix).length <= 1;
 });
-listenerRouteChange((route: RouteLocationNormalized) => {
+routeChangeConsumer((route: RouteLocationNormalized) => {
   if (route.fullPath.startsWith('/redirect')) return;
   const item = list.value.find((item) => item.fullPath === route.fullPath);
 
-  if (route.fullPath === activeKey.value && !item?.loading) return;
-  activeKey.value = route.fullPath;
+  if (route.fullPath === activeFullPath.value && !item?.loading) return;
+  activeFullPath.value = route.fullPath;
   multiTabStore.addItem(route);
 }, true);
+
 onUnmounted(() => {
   removeRouteListener();
 });
@@ -62,7 +63,7 @@ onUnmounted(() => {
   <div v-if="layoutSetting.multiTabFixed" :style="{ height: `${height + 10}px` }"></div>
   <a-tabs
     ref="tabsRef"
-    :active-key="activeKey"
+    :active-key="activeFullPath"
     :style="tabStyle"
     class="bg-white dark:bg-#242525 w-100% pro-ant-multi-tab"
     pt-10px
@@ -77,7 +78,7 @@ onUnmounted(() => {
           <div>
             {{ item.locale ? $t(item.locale) : item.title }}
             <button
-              v-if="activeKey === item.fullPath"
+              v-if="activeFullPath === item.fullPath"
               class="ant-tabs-tab-remove"
               style="margin: 0"
               @click.stop="multiTabStore.refresh(item.fullPath)"
@@ -95,7 +96,7 @@ onUnmounted(() => {
           </div>
           <template #overlay>
             <a-menu @click="handleSwitch($event, item.fullPath)">
-              <a-menu-item key="closeCurrent" :disabled="isCurrentDisabled || activeKey !== item.fullPath">
+              <a-menu-item key="closeCurrent" :disabled="isCurrentDisabled || activeFullPath !== item.fullPath">
                 <!-- 关闭当前 -->
                 {{ $t('app.multiTab.closeCurrent') }}
               </a-menu-item>
@@ -128,7 +129,7 @@ onUnmounted(() => {
         <a-dropdown :trigger="['hover']">
           <MoreOutlined class="text-16px" />
           <template #overlay>
-            <a-menu @click="handleSwitch($event, activeKey)">
+            <a-menu @click="handleSwitch($event, activeFullPath)">
               <a-menu-item key="closeOther" :disabled="isCurrentDisabled || otherDisabled">
                 <!-- 关闭其他 -->
                 {{ $t('app.multiTab.closeOther') }}

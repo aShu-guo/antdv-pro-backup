@@ -11,12 +11,12 @@ const key = Symbol('ROUTE_CHANGE');
 
 let latestRoute: RouteLocationNormalized;
 
-export function setRouteEmitter(to: RouteLocationNormalized) {
+export function routeChangeProducer(to: RouteLocationNormalized) {
   emitter.emit(key, to);
   latestRoute = to;
 }
 
-export function listenerRouteChange(handler: (route: RouteLocationNormalized) => void, immediate = true) {
+export function routeChangeConsumer(handler: (route: RouteLocationNormalized) => void, immediate = true) {
   emitter.on(key, handler as Handler);
   if (immediate && latestRoute) handler(latestRoute);
 }
