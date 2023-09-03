@@ -4,10 +4,11 @@ import BasicLayout from './basic-layout/index.vue';
 import SettingDrawer from './components/setting-drawer/index.vue';
 import MultiTab from './multi-tab/index.vue';
 import { animationNameList } from '~@/config/default-setting';
+import { useLayoutMenuStore } from '~/stores/layout-menu.ts';
 const appStore = useAppStore();
 const { layoutSetting } = storeToRefs(appStore);
 const userStore = useUserStore();
-const layoutMenu = useLayoutMenu();
+const layoutMenu = useLayoutMenuStore();
 const { t } = useI18nLocale();
 const { selectedKeys, openKeys } = storeToRefs(layoutMenu);
 const { isMobile, isPad } = useQueryBreakpoints();
@@ -32,10 +33,10 @@ const layoutProps = computed(() =>
 
 <template>
   <BasicLayout
+    v-bind="layoutProps"
     :collapsed="layoutSetting.collapsed"
     :theme="layoutSetting.theme"
     :menu-data="userStore.menuData"
-    v-bind="layoutProps"
     :selected-keys="selectedKeys"
     :open-keys="layoutSetting.layout === 'top' ? [] : openKeys"
     :copyright="layoutSetting.copyright"
@@ -62,15 +63,14 @@ const layoutProps = computed(() =>
     </template>
 
     <template #renderFooterLinks></template>
-    <a-watermark h-full flex flex-col flex-1 :content="layoutSetting.title ?? 'Antdv Pro'">
-      <RouterView>
-        <template #default="{ Component }">
-          <component :is="Component" />
-        </template>
+    <a-watermark class="h-full flex flex-col flex-1" :content="layoutSetting.title ?? 'Antdv Pro'">
+      <RouterView v-slot="{ Component }">
+        <component :is="Component" />
       </RouterView>
     </a-watermark>
   </BasicLayout>
   <SettingDrawer
+    v-bind="layoutProps"
     v-model:open="layoutSetting.drawerVisible"
     :t="t"
     :theme="layoutSetting.theme"
@@ -82,7 +82,6 @@ const layoutProps = computed(() =>
     :animation-name="layoutSetting.animationName"
     :keep-alive="layoutSetting.keepAlive"
     :accordion-mode="layoutSetting.accordionMode"
-    v-bind="layoutProps"
     :layout-setting="layoutSetting"
     @setting-change="appStore.changeSettingLayout"
   />

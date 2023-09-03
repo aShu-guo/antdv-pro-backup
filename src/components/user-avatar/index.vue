@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { LogoutOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons-vue';
+import { useLayoutMenuStore } from '~/stores/layout-menu.ts';
 const message = useMessage();
 const userStore = useUserStore();
 const multiTabStore = useMultiTab();
-const layoutMenuStore = useLayoutMenu();
+const layoutMenuStore = useLayoutMenuStore();
 const router = useRouter();
 const { avatar, nickname } = storeToRefs(userStore);
 const handleClick = async ({ key }: any) => {

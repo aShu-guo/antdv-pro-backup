@@ -1,8 +1,9 @@
 import router from '@/router';
+import { useLayoutMenuStore } from '~/stores/layout-menu.ts';
 
 export const useCurrentRoute = () => {
   const currentRoute = router.currentRoute;
-  const layoutMenuStore = useLayoutMenu();
+  const layoutMenuStore = useLayoutMenuStore();
   const { menuDataMap } = storeToRefs(layoutMenuStore);
   const pathsKeys = menuDataMap.value?.keys();
   const currentPath = currentRoute.value.path;

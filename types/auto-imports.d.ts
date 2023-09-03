@@ -205,7 +205,8 @@ declare global {
   const useIntervalFn: (typeof import('@vueuse/core'))['useIntervalFn'];
   const useKeyModifier: (typeof import('@vueuse/core'))['useKeyModifier'];
   const useLastChanged: (typeof import('@vueuse/core'))['useLastChanged'];
-  const useLayoutMenu: (typeof import('../src/stores/layout-menu'))['useLayoutMenu'];
+  const useLayoutMenu: (typeof import('../src/stores/layout-menu'))['useLayoutMenuStore'];
+  const useLayoutMenuStore: (typeof import('../src/stores/layout-menu'))['useLayoutMenuStore'];
   const useLink: (typeof import('vue-router'))['useLink'];
   const useLoading: (typeof import('../src/composables/base-loading'))['useLoading'];
   const useLoadingCheck: (typeof import('../src/composables/loading'))['useLoadingCheck'];

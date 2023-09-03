@@ -9,7 +9,7 @@ const toMapMenuData = (menuData: MenuData, menuDataMap: Map<string, MenuDataItem
   });
 };
 
-export const useLayoutMenu = defineStore('layout-menu', () => {
+export const useLayoutMenuStore = defineStore('layout-menu', () => {
   const userStore = useUserStore();
   const appStore = useAppStore();
   const { layoutSetting } = storeToRefs(appStore);

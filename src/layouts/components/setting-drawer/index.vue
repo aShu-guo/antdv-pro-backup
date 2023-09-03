@@ -73,6 +73,7 @@ const changeLayout = (layout: string) => {
 };
 const changeSettingLayout = (key: string, value: any) => {
   emit('settingChange', key, value);
+  console.log(key, value);
 };
 
 const { token } = useAntdToken();

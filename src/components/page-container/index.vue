@@ -2,6 +2,7 @@
 import { delayTimer, isFunction } from '@v-c/utils';
 import type { VNodeChild } from 'vue';
 import { useLayoutState } from '~/layouts/basic-layout/context';
+import { useLayoutMenuStore } from '~/stores/layout-menu.ts';
 defineProps<{
   title?: string;
 }>();
@@ -13,7 +14,7 @@ defineSlots<{
   extra(props: any): any;
   footer(props: any): any;
 }>();
-const layoutMenuStore = useLayoutMenu();
+const layoutMenuStore = useLayoutMenuStore();
 const { menuDataMap, selectedKeys } = storeToRefs(layoutMenuStore);
 const currentItem = computed(() => {
   const key: string = selectedKeys.value.length ? selectedKeys.value[0] : '';
