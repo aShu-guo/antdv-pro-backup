@@ -23,7 +23,7 @@ const menuTheme = computed(() => {
 <template>
   <a-menu
     :selected-keys="selectedKeys"
-    :open-keys="openKeys"
+    :open-keys="collapsed ? [] : openKeys"
     :mode="layout === 'top' && !isMobile ? 'horizontal' : 'inline'"
     :theme="menuTheme"
     :collapsed="collapsed"
