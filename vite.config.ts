@@ -49,11 +49,6 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     server: {
       port: 6678,
       proxy: {
-        [env.VITE_APP_BASE_API_DEV]: {
-          target: env.VITE_APP_BASE_URL_DEV,
-          changeOrigin: true,
-          rewrite: (path: string) => path.replace(new RegExp(`^${env.VITE_APP_BASE_API_DEV}`), ''),
-        },
         [env.VITE_APP_BASE_API]: {
           target: env.VITE_APP_BASE_URL,
           changeOrigin: true,

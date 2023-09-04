@@ -1,6 +1,6 @@
 export default eventHandler(async (_event) => {
   return {
-    code: 200,
-    msg: '编辑成功',
-  }
-})
+    bizCode: 200,
+    message: '编辑成功',
+  };
+});

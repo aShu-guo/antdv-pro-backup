@@ -1,3 +1,3 @@
-import { useDelete, useGet, usePost, usePut } from '~/utils/request';
+import { useDelete, useGet, usePost, usePut } from '~/utils/http';
 
 export { useDelete, useGet, usePost, usePut };

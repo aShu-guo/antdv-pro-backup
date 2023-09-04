@@ -1,6 +1,6 @@
 export default eventHandler(() => {
   return {
-    code: 200,
-    msg: 'post',
-  }
-})
+    bizCode: 200,
+    message: 'post',
+  };
+});

@@ -396,8 +396,8 @@ export default eventHandler((event) => {
   const token = getHeader(event, 'Authorization');
   const username = Buffer.from(token, 'base64').toString('utf-8');
   return {
-    code: 200,
-    msg: '获取成功',
+    bizCode: 200,
+    message: '获取成功',
     data: [...menuData, ...(username === 'admin' ? accessMenuData : [])],
   };
 });

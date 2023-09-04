@@ -139,9 +139,9 @@ onMounted(() => {
       <a-table :loading="loading" :columns="columns" :data-source="dataSource">
         <template #bodyCell="{ column, record }">
           <template v-if="column.dataIndex === 'action'">
-            <div flex gap-2>
-              <a c-primary @click="handleAction('edit', record as any)"> 编辑 </a>
-              <a c-error @click="handleDel(record as any)"> 删除 </a>
+            <div class="flex gap-2">
+              <a class="c-primary" @click="handleAction('edit', record as any)"> 编辑 </a>
+              <a class="c-error" @click="handleDel(record as any)"> 删除 </a>
             </div>
           </template>
         </template>

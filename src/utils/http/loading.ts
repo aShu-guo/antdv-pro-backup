@@ -1,11 +1,12 @@
 import { useLoading } from '@/composables/base-loading';
 import { LoadingEnum } from '~#/loading-enum';
+
 const loading = useLoading({
   spin: LoadingEnum.CHASE,
   minTime: 500,
 });
 
-export class AxiosLoading {
+class AxiosLoading {
   loadingCount: number;
   constructor() {
     this.loadingCount = 0;
@@ -24,3 +25,5 @@ export class AxiosLoading {
     }
   }
 }
+
+export const axiosLoading = new AxiosLoading();

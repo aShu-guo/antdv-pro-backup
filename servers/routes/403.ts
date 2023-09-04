@@ -1,7 +1,7 @@
 export default eventHandler((event) => {
-  setResponseStatus(event, 403)
+  setResponseStatus(event, 403);
   return {
-    code: 403,
-    msg: '请先登录',
-  }
-})
+    bizCode: 403,
+    message: '请先登录',
+  };
+});

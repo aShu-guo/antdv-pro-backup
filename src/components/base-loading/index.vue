@@ -40,9 +40,11 @@ export default defineComponent({
       const { background, modal, full, text, textColor } = props;
       return (
         <div style={modal ? { background } : {}} class={{ 'loading-container': true, 'is-fullscreen': full }}>
-          <div class="loading-wrapper">{renderBasicLoading()}</div>
-          <div class="text" style={{ color: textColor }}>
-            {text}
+          <div class="absolute top-50% w-full mt--21px text-center">
+            {renderBasicLoading()}
+            <div class="w-full my-8px" style={{ color: textColor }}>
+              {text}
+            </div>
           </div>
         </div>
       );
@@ -59,32 +61,6 @@ export default defineComponent({
 
   &.is-fullscreen {
     position: fixed;
-  }
-
-  .loading-wrapper {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    margin-top: -21px;
-    text-align: center;
-
-    .text {
-      width: 100%;
-      margin: 8px 0;
-    }
-
-    .loading-icon {
-      animation: rotating 1.5s linear infinite;
-    }
-  }
-}
-@keyframes rotating {
-  0% {
-    transform: rotate(0);
-  }
-
-  100% {
-    transform: rotate(1turn);
   }
 }
 </style>
