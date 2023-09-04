@@ -41,7 +41,6 @@ const menuData = [
     path: '/link',
     name: 'Link',
     locale: 'menu.link',
-
   },
   {
     id: 6,
@@ -379,7 +378,7 @@ const menuData = [
     keepAlive: false,
     locale: 'menu.form.advanced-form',
   },
-]
+];
 
 export const accessMenuData = [
   {
@@ -391,15 +390,14 @@ export const accessMenuData = [
     component: '/access/admin',
     locale: 'menu.access.admin',
   },
-
-]
+];
 
 export default eventHandler((event) => {
-  const token = getHeader(event, 'Authorization')
-  const username = Buffer.from(token, 'base64').toString('utf-8')
+  const token = getHeader(event, 'Authorization');
+  const username = Buffer.from(token, 'base64').toString('utf-8');
   return {
     code: 200,
     msg: '获取成功',
     data: [...menuData, ...(username === 'admin' ? accessMenuData : [])],
-  }
-})
+  };
+});

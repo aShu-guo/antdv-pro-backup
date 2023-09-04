@@ -142,12 +142,12 @@ onBeforeUnmount(() => {
         </div>
         <a-divider m-0 />
         <!-- 登录主体 -->
-        <div class="box-border flex min-h-[520px]">
+        <div class="box-border flex min-h-520px">
           <!-- 登录框左侧 -->
-          <div class="ant-pro-form-login-main-left min-h-[520px] flex-center bg-[var(--bg-color-container)]">
+          <div class="ant-pro-form-login-main-left min-h-520px flex-center bg-[var(--bg-color-container)]">
             <img src="@/assets/images/login-left.png" class="h-5/6 w-5/6" />
           </div>
-          <a-divider m-0 type="vertical" class="ant-pro-login-divider min-h-[520px]" />
+          <a-divider m-0 type="vertical" class="ant-pro-login-divider min-h-520px" />
           <!-- 登录框右侧 -->
           <div class="ant-pro-form-login-main-right px-5 w-[335px] flex-center flex-col relative z-11">
             <div class="text-center py-6 text-2xl">

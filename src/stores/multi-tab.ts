@@ -124,7 +124,6 @@ export const useMultiTab = defineStore('multi-tab', {
 
         const index2 = this.cacheList.findIndex((name) => name === item.name);
         this.$patch((state) => {
-          // state.list[index].loading = true;
           state.list.splice(index, 1, { ...item, loading: true });
           state.cacheList.splice(index2, 1);
         });

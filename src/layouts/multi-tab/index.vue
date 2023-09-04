@@ -65,8 +65,7 @@ onUnmounted(() => {
     ref="tabsRef"
     :active-key="activeFullPath"
     :style="tabStyle"
-    class="bg-white dark:bg-#242525 w-100% pro-ant-multi-tab"
-    pt-10px
+    class="bg-white pt-10px dark:bg-#242525 w-100% pro-ant-multi-tab"
     type="card"
     size="small"
     :tab-bar-gutter="5"

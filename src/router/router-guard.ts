@@ -22,19 +22,21 @@ router.beforeEach(async (to, _, next) => {
       return;
     }
   } else {
-    if (!userStore.userInfo && !allowList.includes(to.path) && !to.path.startsWith('/redirect')) {
+    if (!userStore.id && !allowList.includes(to.path) && !to.path.startsWith('/redirect')) {
       try {
         // 获取用户信息
         await userStore.getUserInfo();
         // 获取路由菜单的信息
         const currentRoute = await userStore.generateDynamicRoutes();
-        router.addRoute(currentRoute);
+        router.addRoute(currentRoute!);
         next({
           ...to,
           replace: true,
         });
         return;
       } catch (e) {
+        console.error(e);
+
         if (e instanceof AxiosError && e?.response?.status === 401) {
           // 跳转到error页面
           next({
