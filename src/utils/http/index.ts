@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ContentTypeEnum, RequestEnum } from '~/utils/http/constant.ts';
 import { errorInterceptor, requestInterceptor, responseInterceptor } from '~/utils/http/interceptors.ts';
 import { axiosLoading } from './loading';
-import type { AxiosOptions, RequestConfigExtra, ResponseBody } from '~/utils/http/typing.ts';
+import type { AxiosOptions, RequestConfigExtra, BizResponse } from '~/utils/http/typing.ts';
 
 const instance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API ?? '/',
@@ -17,7 +17,7 @@ instance.interceptors.response.use(responseInterceptor, errorInterceptor);
 
 export default instance;
 
-const instancePromise = <R = any, T = any>(options: AxiosOptions<T> & RequestConfigExtra): Promise<ResponseBody<R>> => {
+const instancePromise = <R = any, T = any>(options: AxiosOptions<T> & RequestConfigExtra): Promise<BizResponse<R>> => {
   const { loading } = options;
   return new Promise((resolve, reject) => {
     instance
@@ -38,7 +38,7 @@ export const useGet = <R = any, T = any>(
   url: string,
   params?: T,
   config?: AxiosRequestConfig & RequestConfigExtra,
-): Promise<ResponseBody<R>> => {
+): Promise<BizResponse<R>> => {
   const options = {
     url,
     params,
@@ -52,7 +52,7 @@ export const usePost = <R = any, T = any>(
   url: string,
   data?: T,
   config?: AxiosRequestConfig & RequestConfigExtra,
-): Promise<ResponseBody<R>> => {
+): Promise<BizResponse<R>> => {
   const options = {
     url,
     data,
@@ -66,7 +66,7 @@ export const usePut = <R = any, T = any>(
   url: string,
   data?: T,
   config?: AxiosRequestConfig & RequestConfigExtra,
-): Promise<ResponseBody<R>> => {
+): Promise<BizResponse<R>> => {
   const options = {
     url,
     data,
@@ -80,7 +80,7 @@ export const useDelete = <R = any, T = any>(
   url: string,
   data?: T,
   config?: AxiosRequestConfig & RequestConfigExtra,
-): Promise<ResponseBody<R>> => {
+): Promise<BizResponse<R>> => {
   const options = {
     url,
     data,

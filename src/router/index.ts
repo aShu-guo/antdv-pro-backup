@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import staticRoutes from './static-routes';
+import staticRoutes from './sync';
 
 const router = createRouter({
   routes: [...staticRoutes],

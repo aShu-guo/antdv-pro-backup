@@ -8,9 +8,9 @@ const finishLoading = () => {
 </script>
 
 <template>
-  <div class="bg-[var(--bg-color)] ant-pro-iframe-wrap" w-full h-full b-rd-8px of-hidden flex flex-col flex-1>
+  <div class="bg-[var(--bg-color)] ant-pro-iframe-wrap w-full h-full b-rd-8px of-hidden flex flex-1 flex-col">
     <a-spin :spinning="loading" wrapper-class-name="b-rd-8px of-hidden w-full h-full flex flex-col flex-1">
-      <iframe w-full h-full flex flex-col flex-1 :src="url" style="border: none" @load="finishLoading"></iframe>
+      <iframe class="w-full h-full flex flex-col flex-1" :src="url" style="border: none" @load="finishLoading"></iframe>
     </a-spin>
   </div>
 </template>

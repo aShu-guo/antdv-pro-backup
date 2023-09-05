@@ -12,6 +12,7 @@ const routerModules = import.meta.glob([
   '!~/pages/**/test',
   '!~/pages/common',
 ]);
+
 export const basicRouteMap = {
   // iframe模式下使用
   Iframe: () => import('~/pages/common/iframe.vue'),
@@ -22,6 +23,7 @@ export const basicRouteMap = {
 };
 
 export const getRouterModule = (path?: string): any => {
+  // debugger
   if (!path) return basicRouteMap.ComponentError;
   // 判断是否在basicRouteMap中存在
   if (path in basicRouteMap) return (basicRouteMap as any)[path];

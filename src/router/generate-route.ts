@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from 'vue-router';
 import { omit } from 'lodash';
 import { basicRouteMap, getRouterModule } from './router-modules';
 import type { MenuData, MenuDataItem } from '~@/layouts/basic-layout/typing';
-import dynamicRoutes, { ROOT_ROUTE_REDIRECT_PATH } from '~@/router/dynamic-routes';
+import dynamicRoutes, { ROOT_ROUTE_REDIRECT_PATH } from '~@/router/async';
 import i18n from '~@/locales';
 
 let cache_key = 1;
@@ -90,6 +90,7 @@ export const generateTreeRoutes = (menus: MenuData) => {
         locale: menuItem?.locale,
       },
     } as RouteRecordRaw;
+    console.log('>>>router moudle:', getRouterModule(menuItem.component!));
     const menu = formatMenu(route);
     routeDataMap.set(menuItem.id, route);
     menuDataMap.set(menuItem.id, menu);

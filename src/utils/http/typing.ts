@@ -1,4 +1,4 @@
-export interface ResponseBody<T = any> {
+export interface BizResponse<T = any> {
   bizCode: number;
   data?: T;
   message: string;

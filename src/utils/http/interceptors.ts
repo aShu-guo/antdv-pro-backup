@@ -2,7 +2,7 @@ import { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { STORAGE_AUTHORIZE_KEY, useAuthorization } from '~/composables/authorization.ts';
 import router from '~/router';
 import { axiosLoading } from '~/utils/http/loading.ts';
-import { RequestConfigExtra, ResponseBody } from '~/utils/http/typing.ts';
+import { RequestConfigExtra, BizResponse } from '~/utils/http/typing.ts';
 
 export const requestInterceptor = (config: InternalAxiosRequestConfig & RequestConfigExtra) => {
   const token = useAuthorization();
@@ -20,10 +20,7 @@ export const requestInterceptor = (config: InternalAxiosRequestConfig & RequestC
  * 响应拦截器，只返回data
  * @param response
  */
-export const responseInterceptor = (
-  response: AxiosResponse,
-): ResponseBody | AxiosResponse<any> | Promise<any> | any => {
-  console.log('>>>response:', response);
+export const responseInterceptor = (response: AxiosResponse): BizResponse | AxiosResponse<any> | Promise<any> | any => {
   return response.data;
 };
 
@@ -37,7 +34,7 @@ export const errorInterceptor = (error: AxiosError): Promise<any> => {
 
   if (error.response) {
     // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
-    const { data, status, statusText } = error.response as AxiosResponse<ResponseBody>;
+    const { data, status, statusText } = error.response as AxiosResponse<BizResponse>;
     switch (status) {
       case 401:
         notification?.error({

@@ -45,6 +45,7 @@ const init = async () => {
   loading.value = true;
   try {
     const { data } = await getListApi(formModel);
+    console.log('>>>>>data:', data);
     dataSource.value = data ?? [];
   } catch (e) {
     console.log(e);
